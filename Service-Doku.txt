@@ -23,7 +23,7 @@ Meeting am 04.11.2014:
   
 Calls:
 (1) /finance/stocks
-(2) /finance/stocks/{stocksymbol}
+(2) /finance/stocks/{stocksymbol}/history
 (3) /users/{username}?pw=pw
 (4) /users/{username}/login?pw=pw
 (5) /finance/stocks/{stocksymbol}?amount=20?sessionID=s
