@@ -1,19 +1,26 @@
 package service.data;
 
-import java.util.Date;
+import service.data.jsonwrapper.YQLQuote;
+
 
 public class StockHistory {
 	private String symbol;
 	
-	private Date date;
+	private String date;
 	
-	private double close;
+	private double value;
 	
-	public StockHistory(String symbol, Date date, double close) {
+	public StockHistory(String symbol, String date, double value) {
 		super();
 		this.symbol = symbol;
 		this.date = date;
-		this.close = close;
+		this.value = value;
+	}
+	
+	public StockHistory(YQLQuote quote) {
+		symbol = quote.getSymbol();
+		date = quote.getDate();
+		value = quote.getClose();
 	}
 
 	public String getSymbol() {
@@ -24,20 +31,20 @@ public class StockHistory {
 		this.symbol = symbol;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
-	public double getClose() {
-		return close;
+	public double getValue() {
+		return value;
 	}
 
-	public void setClose(double close) {
-		this.close = close;
+	public void setValue(double value) {
+		this.value = value;
 	}
 	
 	

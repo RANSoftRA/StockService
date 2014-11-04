@@ -12,55 +12,76 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import service.data.Stock;
+import service.data.StockHistory;
 import service.data.TransactionResponse;
-import service.misc.YQL;
+import service.data.service.YQLService;
+import service.misc.DateFormat;
 import service.persistence.TransactionDao;
 import service.persistence.domain.Transaction;
 
 @RestController
 @RequestMapping("/finance")
-public class FinanceController {	
-	
+public class FinanceController {
+
 	@Autowired
 	private TransactionDao transactionDao;
-	
+
 	@Autowired
-	private YQL yql;
+	private YQLService yql;
+
+	@Autowired
+	private DateFormat dateFormat;
 
 	@RequestMapping(value = "/stocks", method = RequestMethod.GET)
 	public List<Stock> getStocks() {
+		// Just returning all Current Stocks from YAHOO (the ten defined)
 		return yql.getAllStocks();
 	}
-	
-	@RequestMapping(value="/stocks/{symbol}/history", method=RequestMethod.GET)
-	public Stock getStockHistory(@PathVariable String symbol) {
 
-		return new Stock(symbol, "bla", 23243, 0.0, 0.0, 0.0, 0.0);
+	@RequestMapping(value = "/stocks/{symbol}/history", method = RequestMethod.GET)
+	public List<StockHistory> getStockHistory(@PathVariable String symbol,
+			@RequestParam(value = "dateFrom", required = true) String dateFrom,
+			@RequestParam(value = "dateTo", required = true) String dateTo) {
 
+		if (yql.isSymbolSupported(symbol)) {
+			try {
+				// Check if valid Date -> If not Exception and return null!
+				dateFormat.parse(dateFrom);
+				dateFormat.parse(dateTo);
+				return yql.getStockHistory(symbol, dateFrom, dateTo);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
 	}
 
-	@RequestMapping(value = "/finance/stocks/{symbol}", method = RequestMethod.POST)
+	@RequestMapping(value = "/stocks/{symbol}", method = RequestMethod.POST)
 	@Transactional
 	public TransactionResponse buyStock(@PathVariable String symbol,
 			@RequestParam(value = "amount", required = true) int amount,
-			@RequestParam(value = "sessionID", required = true) String sessionID) {			
-		
-		//TODO Current User Parameter (currently null)
-		transactionDao.saveOrUpdateTransaction(new Transaction(symbol, amount, new Date(), yql.getCurrentPrice(symbol), Transaction.TransactionType.BUY, null));	
-		
-		return new TransactionResponse(null,null);
+			@RequestParam(value = "sessionID", required = true) String sessionID) {
+
+		// TODO Current User Parameter (currently null)
+		transactionDao.saveOrUpdateTransaction(new Transaction(symbol, amount,
+				new Date(), yql.getCurrentPrice(symbol),
+				Transaction.TransactionType.BUY, null));
+
+		return new TransactionResponse(null, null);
 	}
 
-	@RequestMapping(value = "/finance/stocks/{symbol}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/stocks/{symbol}", method = RequestMethod.DELETE)
 	@Transactional
 	public TransactionResponse sellStock(@PathVariable String symbol,
-			@RequestParam(value = "amount", required = true) int amount, 
-			@RequestParam(value = "sessionID", required = true) String s){
-		
-		//TODO Current User Parameter (currently null)
-		transactionDao.saveOrUpdateTransaction(new Transaction(symbol, amount, new Date(), yql.getCurrentPrice(symbol), Transaction.TransactionType.SELL, null));
-		
-		return new TransactionResponse(null,null);	
+			@RequestParam(value = "amount", required = true) int amount,
+			@RequestParam(value = "sessionID", required = true) String s) {
+
+		// TODO Current User Parameter (currently null)
+		transactionDao.saveOrUpdateTransaction(new Transaction(symbol, amount,
+				new Date(), yql.getCurrentPrice(symbol),
+				Transaction.TransactionType.SELL, null));
+
+		return new TransactionResponse(null, null);
 
 	}
 

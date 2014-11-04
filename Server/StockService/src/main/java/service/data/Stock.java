@@ -1,5 +1,7 @@
 package service.data;
 
+import service.data.jsonwrapper.YQLQuote;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
@@ -17,12 +19,22 @@ public class Stock {
 	
 	private double daysLow;
 	
-	private double change;
+	private String change;
+	
+	public Stock(YQLQuote quote) {
+		symbol = quote.getSymbol();
+		name = quote.getName();
+		volume = quote.getVolume();
+		lastTradedPriceOnly = quote.getLastTradePriceOnly();
+		daysHigh = quote.getDaysHigh();
+		daysLow = quote.getDaysLow();
+		change = quote.getChange();
+	}
 	
 	
 	public Stock(String symbol, String name, long volume,
 			double lastTradedPriceOnly, double daysHigh, double daysLow,
-			double change) {
+			String change) {
 		super();
 		this.symbol = symbol;
 		this.name = name;
@@ -57,7 +69,7 @@ public class Stock {
 		return daysLow;
 	}
 
-	public double getChange() {
+	public String getChange() {
 		return change;
 	}
 }

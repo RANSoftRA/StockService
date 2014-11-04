@@ -1,22 +1,17 @@
-package service.data;
+package service.data.jsonwrapper;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class YQLQuery {
 
-	private Results results;
-	
-	
-	public Results getResults() {
+	private YQLResult results;
+
+	public YQLResult getResults() {
 		return results;
 	}
 
-	public void setResults(Results results) {
+	public void setResults(YQLResult results) {
 		this.results = results;
 	}
-
-
-	
-	
 }
