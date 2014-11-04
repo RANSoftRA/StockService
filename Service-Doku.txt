@@ -1,0 +1,33 @@
+Meeting am 03.11.2014:
+* Source tree (Clone; Commit --> Push; ignore files; nur pushen wenn ausführbar!!! (Commit geht, aber auch nicht zu oft machen))
+* JQuery
+* JSON
+* JavaScript
+
+Meeting am 04.11.2014:
+* AngularJS statt JQuery (AngularJS-Buch --> Website)
+* HTML5
+* Balsamiq
+* Canvas
+* REST
+
+* Services:
+  (1) GET - All stocks
+  (2) GET - Stock history (last month/week from now back)
+  (3) PUT - Register
+  (4) POST - Log in
+  (5) PUT - Buy stock
+  (6) DELETE - Sell stock
+  (7) PUT - Update user
+  
+Calls:
+(1) /finance/stocks
+(2) /finance/stocks/{stocksymbol}
+(3) /user?un=un&pw=pw
+(4) /user/login?un=un&pw=pw
+(5) /finance/stocks/{stocksymbol}?amount=20?sessionID=s
+(6) /finance/stocks/{stocksymbol}?amount=20?sessionID=s
+(7) /user?un=un&pw=pw&sessionID=s
+
+Responses:
+(1) success: Liste mit 
