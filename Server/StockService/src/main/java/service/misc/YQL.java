@@ -27,4 +27,9 @@ public class YQL {
 	public List<Stock> getAllStocks() {
 		return null;
 	}
+
+	public double getCurrentPrice(String symbol) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
