@@ -1,5 +1,9 @@
 package service.persistence;
 
-public interface UserDao {
+import service.persistence.domain.User;
 
+public interface UserDao {
+	
+	public User getUserByUserName(String username);
+	
 }
