@@ -65,4 +65,9 @@ public class YQL {
 		
 		return null;
 	}
+
+	public double getCurrentPrice(String symbol) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

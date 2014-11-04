@@ -22,6 +22,9 @@ public class Transaction {
 	private String stock;
 	
 	@Column(nullable=false)
+	private int amount;
+	
+	@Column(nullable=false)
 	private Date date;
 	
 	@Column(nullable=false)
@@ -32,14 +35,34 @@ public class Transaction {
 	
 	@ManyToOne
 	@JoinColumn(name="idUser", nullable=false)
-	private User user;
+	private User user;	
 	
+	
+	public Transaction(String stock, int amount, Date date, double price,
+			TransactionType transactionType, User user) {
+		super();
+		this.stock = stock;
+		this.amount = amount;
+		this.date = date;
+		this.price = price;
+		this.transactionType = transactionType;
+		this.user = user;
+	}
+
 	public String getStock() {
 		return stock;
 	}
 
 	public void setStock(String stock) {
 		this.stock = stock;
+	}
+
+	public int getAmount() {
+		return amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
 	}
 
 	public Date getDate() {
