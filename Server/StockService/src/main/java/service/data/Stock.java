@@ -3,7 +3,7 @@ package service.data;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
-public class Quote {
+public class Stock {
 	
 	private String symbol;
 	
@@ -18,6 +18,20 @@ public class Quote {
 	private double daysLow;
 	
 	private double change;
+	
+	
+	public Stock(String symbol, String name, long volume,
+			double lastTradedPriceOnly, double daysHigh, double daysLow,
+			double change) {
+		super();
+		this.symbol = symbol;
+		this.name = name;
+		this.volume = volume;
+		this.lastTradedPriceOnly = lastTradedPriceOnly;
+		this.daysHigh = daysHigh;
+		this.daysLow = daysLow;
+		this.change = change;
+	}
 
 	public String getSymbol() {
 		return symbol;

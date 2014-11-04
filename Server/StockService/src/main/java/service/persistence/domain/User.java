@@ -22,6 +22,9 @@ public class User {
 	
 	@Column(nullable=false)
 	private String password;
+	
+	@Column(nullable=false)
+	private double balance;
 
 	@OneToMany(mappedBy="user")
 	private Set<UserSession> userSessions;
@@ -56,4 +59,22 @@ public class User {
 	public void setUserSessions(Set<UserSession> userSessions) {
 		this.userSessions = userSessions;
 	}
+
+	public double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
+
+	public Set<Transaction> getTransactions() {
+		return transactions;
+	}
+
+	public void setTransactions(Set<Transaction> transactions) {
+		this.transactions = transactions;
+	}
+	
+	
 }
