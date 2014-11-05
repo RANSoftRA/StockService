@@ -1,5 +1,5 @@
 Meeting am 03.11.2014:
-* Source tree (Clone; Commit --> Push; ignore files; nur pushen wenn ausführbar!!! (Commit geht, aber auch nicht zu oft machen))
+* Source tree (Clone; Commit --> Push; ignore files; nur pushen wenn ausführbar!!! (Commit okay))
 * JQuery
 * JSON
 * JavaScript
@@ -10,6 +10,7 @@ Meeting am 04.11.2014:
 * Balsamiq
 * Canvas
 * REST
+* XAMPP (Apache and MySQL)
 
 * Services:
   (1) GET - All stocks
