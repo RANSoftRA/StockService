@@ -18,7 +18,7 @@ import service.misc.DateFormat;
 @Component
 public class YQLServiceImpl implements YQLService {
 
-	protected final String serviceUrl = "https://query.yahooapis.com/v1/public/yql";
+	protected final String serviceUrl = "http://query.yahooapis.com/v1/public/yql";
 
 	@Autowired
 	private DateFormat dateFormat;
