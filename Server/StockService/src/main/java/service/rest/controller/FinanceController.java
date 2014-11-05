@@ -33,9 +33,9 @@ public class FinanceController {
 	@Autowired
 	private DateFormat dateFormat;
 
+
 	@RequestMapping(value = "/stocks", method = RequestMethod.GET)
 	public List<Stock> getStocks() {
-		// Just returning all Current Stocks from YAHOO (the ten defined)
 		return yql.getAllStocks();
 	}
 
@@ -45,7 +45,6 @@ public class FinanceController {
 		Calendar fromCal = Calendar.getInstance();
 		fromCal.setTime(now);
 		fromCal.add(Calendar.MONTH, -1);
-		
 		String dateFrom = dateFormat.format(fromCal.getTime());
 		String dateTo = dateFormat.format(now);
 		return yql.getStockHistory(symbol, dateFrom, dateTo);
@@ -53,23 +52,25 @@ public class FinanceController {
 
 	@RequestMapping(value = "/stocks/{symbol}", method = RequestMethod.POST)
 	@Transactional
-	public TransactionResponse buyStock(@PathVariable String symbol,
-			@RequestParam(value = "amount", required = true) int amount,
-			@RequestParam(value = "sessionID", required = true) String sessionID) {
-
+	public TransactionResponse buyStock(
+			@RequestParam(value = "sessionID", required = true) String sessionId,
+			@PathVariable String symbol,
+			@RequestParam(value = "amount", required = true) int amount) {
+		
 		// TODO Current User Parameter (currently null)
 		transactionDao.saveOrUpdateTransaction(new Transaction(symbol, amount,
 				new Date(), yql.getCurrentPrice(symbol),
 				Transaction.TransactionType.BUY, null));
-
+		
 		return new TransactionResponse(null, null);
 	}
 
 	@RequestMapping(value = "/stocks/{symbol}", method = RequestMethod.DELETE)
 	@Transactional
-	public TransactionResponse sellStock(@PathVariable String symbol,
-			@RequestParam(value = "amount", required = true) int amount,
-			@RequestParam(value = "sessionID", required = true) String s) {
+	public TransactionResponse sellStock(
+			@RequestParam(value = "sessionID", required = true) String sessionId,
+			@PathVariable String symbol,
+			@RequestParam(value = "amount", required = true) int amount) {
 
 		// TODO Current User Parameter (currently null)
 		transactionDao.saveOrUpdateTransaction(new Transaction(symbol, amount,

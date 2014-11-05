@@ -1,10 +1,10 @@
 <div class="container-fluid">
-	<form class="form-horizontal">
+	<div class="form-horizontal">
 		<div class="form-group" style="width: 100%;">
-			<label class="col-sm-1 control-label">Hallo {{email}}</label>
+			<label class="col-sm-3 control-label">Hallo {{currentUser}}</label>
 			<div class="col-sm-1">
-				<button type="submit" name="logout" class="btn btn-default">Logout</button>
+				<button type="submit" name="logout" class="btn btn-default" ng-click="logout()">Logout</button>
 			</div>
 		</div>
-	</form>
+	</div>
 </div>

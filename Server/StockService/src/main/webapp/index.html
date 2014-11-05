@@ -5,43 +5,57 @@
 <script type="text/javascript" src="js/application.js"></script>
 <link rel="stylesheet" href="css/bootstrap.min.css"></link>
 <link rel="stylesheet" href="css/style.css"></link>
-<title>Webclient StockService - Gruppe 1</title>
+<title>Webclient StockService - Group 1</title>
 </head>
 <body>
 	<!-- Top Div ist für das Login notwendig - Möglicherweis -->
 	<div id="top" ng-controller="TopController">
-		<unregistered></unregistered>
+		<unregistered ng-show="!loggedIn"></unregistered>
+		<registered ng-show="loggedIn"></registered>
 	</div>
 	<div id="middle" class="container" ng-controller="MiddleController">
 		<div class="row">
-			<div class="col-md-4 contentwrapper">
-				<ul class="stockOverview">
+			<div class="col-md-4 stockOverview">
+				<ul>
 					<li ng-repeat="stock in stocks">
-						<div class="clickStockDiv" ng-click="getStockhistory(stock.symbol)">
+						<div class="clickStockDiv" ng-click="getStockhistory(stock)">
 								{{stock.name}} 
-								<span ng-show="stock.change < 0" class="red pull-right">{{stock.change}}</span> 
-								<span ng-show="stock.change > 0" class="green pull-right">{{stock.change}}</span>
+								<span ng-show="stock.change < 0" class="red pull-right">{{stock.change}} $</span> 
+								<span ng-show="stock.change > 0" class="green pull-right">{{stock.change}} $</span>
 						</div>
 					</li>
 				</ul>
 			</div>
-			<div class="col-md-8">
+			<div class="col-md-8" ng-show="currentStock != null">
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-md-12">
-						
+							Hier kommt das Canvas zum Zeichnen
+							<p>{{stockHistory}}</p>
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-12 contentWrapper">
-							<ul class="horizontal">
-								
-							</ul>
+						<div class="col-md-12 stockinfo">
+							<div class="container-fluid">
+								<div class="row">
+									<div class="col-md-3">
+										{{currentStock.symbol}}
+									</div>
+									<div class="col-md-3">
+										{{currentStock.name}}
+									</div>
+									<div class="col-md-3">
+										Price: {{currentStock.lastTradedPriceOnly}} $
+									</div>
+									<div class="col-md-3">
+										Volume: {{currentStock.volume}}
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
-				Hier kommt das Canvas zum Zeichnen
-				<p>{{stockHistory}}</p>
+				
 			</div>
 		</div>
 	</div>

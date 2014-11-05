@@ -1,20 +1,20 @@
 <div class="container-fluid">
-	<form class="form-horizontal">
+	<div class="form-horizontal">
 		<div class="form-group" style="width: 100%;">
 			<label class="col-sm-1 control-label">E-Mail</label>
 			<div class="col-sm-2">
-				<input type="email" class="form-control" id="un"></input>
+				<input type="text" class="form-control" ng-model="un"></input>
 			</div>
 			<label class="col-sm-1 control-label">Password</label>
 			<div class="col-sm-2">
-				<input type="password" class="form-control" id="pw"></input>
+				<input type="password" class="form-control" ng-model="pw"></input>
 			</div>
 			<div class="col-sm-1">
-				<button type="submit" name="login" class="btn btn-default">Login</button>
+				<button type="submit" name="login" class="btn btn-default" ng-click="login(un,pw)">Login</button>
 			</div>
 			<div class="col-sm-1">
-				<button type="submit" name="register" class="btn btn-default">Register</button>
+				<button type="submit" name="register" class="btn btn-default" ng-click="register(un,pw)">Register</button>
 			</div>
 		</div>
-	</form>
+	</div>
 </div>

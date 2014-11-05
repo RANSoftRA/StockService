@@ -14,49 +14,44 @@ Meeting am 04.11.2014:
 * Services:
   (1) GET - All stocks
   (2) GET - Stock history (last month/week from now back)
-  (3) PUT - Register
+  (3) PUT - Register / Update user
   (4) POST - Log in
   (5) PUT - Buy stock
   (6) DELETE - Sell stock
-  (7) PUT - Update user
-  (8) POST - Logout
+  (7) POST - Logout
   
 Calls:
 (1) /finance/stocks
 (2) /finance/stocks/{stocksymbol}/history
-(3) /users/{username}?pw=pw
+(3) /users/{username}?pw=pw?sessionID=s
 (4) /users/{username}/login?pw=pw
 (5) /finance/stocks/{stocksymbol}?amount=20?sessionID=s
 (6) /finance/stocks/{stocksymbol}?amount=20?sessionID=s
-(7) /users/{username}?pw=pw&sessionID=s
-(8) /users/{username}/logout?sessionID=s
+(7) /users/logout?sessionID=s
 
 Responses:
 (1) success: Liste mit Stock Objekten: symbol, name, volume, lastTradedpriceOnly, daysHigh, daysLow, change  => JSON Beispiel: [{"symbol":"YHOO","name":"bla","volume":23434,"lastTradedPriceOnly":0.23,"daysHigh":0.23432,"daysLow":0.234,"change":0.252},{"symbol":"YHadsf","name":"bla","volume":23434,"lastTradedPriceOnly":0.23,"daysHigh":0.23432,"daysLow":0.234,"change":0.252},{"symbol":"asdf","name":"bla","volume":23434,"lastTradedPriceOnly":0.23,"daysHigh":0.23432,"daysLow":0.234,"change":0.252}]
 	error: Objekt: code=6000, message=Generic Error Message
 (2) success: Liste mit StockHistory Objekten: symbol, date, close
 	error: Objekt: code=6000, message=Generic Error Message
-(3) success: Objekt: sessionKey
+(3) success: Objekt: sessionKey, [Transaktion{symbol, name, amount, data, price, type}, [PortfolioStock{symbol, name, amount, balance}]
 	error: Objekt: code=6000, message=Generic Error Message
 	error: Objekt: code=7000, message=UN already exists
 	error: Objekt: code=7001, message=Password not valid
-(4) success: Objekt: sessionKey
+	error: Objekt: code=7001, message=Password not valid
+	error: Objekt: code=9000, message=No Session Available
+(4) success: Objekt: sessionKey, [Transaktion{symbol, name, amount, data, price, type}, [PortfolioStock{symbol, name, amount, balance}]
 	error: Objekt: code=6000, message=Generic Error Message
 	error: Objekt: code=7002, message=Wrong Credentials
-(5) success: Objekt: [Transaktion{symbol, name, amount, data, price, type}, PortfolioStock{symbol, name, amount, balance}]
+(5) success: Objekt: [Transaktion{symbol, name, amount, data, price, type}, [PortfolioStock{symbol, name, amount, balance}]
 	error: Objekt: code=6000, message=Generic Error Message
 	error: Objekt: code=8000, message=Not enough money
 	error: Objekt: code=8001, message=Not enough stocks available
 	error: Objekt: code=9000, message=No Session Available
-(6) success: Objekt: [Transaktion{symbol, name, amount, data, price, type}, PortfolioStock{symbol, name, amount, balance}]
+(6) success: Objekt: [Transaktion{symbol, name, amount, data, price, type}, [PortfolioStock{symbol, name, amount, balance}]
 	error: Objekt: code=6000, message=Generic Error Message
 	error: Objekt: code=8001, message=Not enough stocks available
 	error: Objekt: code=9000, message=No Session Available
 (7) success: Kein Objekt
-	error: Objekt: code=6000, message=Generic Error Message
-	error: Objekt: code=7001, message=Password not valid
-	error: Objekt: code=9000, message=No Session Available
-(8) success: Kein Objekt
 	error: Objekt: code=9000, message=No Session Available
 	error: Objekt: code=6000, message=Generic Error Message
-	

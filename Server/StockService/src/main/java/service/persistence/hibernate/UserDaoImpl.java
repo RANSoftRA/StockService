@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import service.persistence.UserDao;
-import service.persistence.domain.User;
+import service.persistence.domain.UserSession;
 
 @Repository
 public class UserDaoImpl extends BaseDao implements UserDao {
@@ -18,10 +18,21 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 	}
 
 	@Override
-	public User getUserByUserName(String username) {
-		Criteria crit = getCurrentSession().createCriteria(User.class);
-		crit.add(Restrictions.eq("username", username));
-		return (User)crit.uniqueResult();
+	public boolean isSessionValid(String session) {
+		Criteria crit = getCurrentSession().createCriteria(UserSession.class);
+		crit.add(Restrictions.eq("uuid", session));
+		
+		if(crit.list().size() != 1) {
+			return false;
+		}
+		
+		return true;
+	}
+
+	@Override
+	public boolean getUserByName(String name) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
