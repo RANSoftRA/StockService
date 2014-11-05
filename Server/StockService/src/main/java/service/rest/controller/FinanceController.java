@@ -1,5 +1,6 @@
 package service.rest.controller;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -39,21 +40,15 @@ public class FinanceController {
 	}
 
 	@RequestMapping(value = "/stocks/{symbol}/history", method = RequestMethod.GET)
-	public List<StockHistory> getStockHistory(@PathVariable String symbol,
-			@RequestParam(value = "dateFrom", required = true) String dateFrom,
-			@RequestParam(value = "dateTo", required = true) String dateTo) {
-
-		if (yql.isSymbolSupported(symbol)) {
-			try {
-				// Check if valid Date -> If not Exception and return null!
-				dateFormat.parse(dateFrom);
-				dateFormat.parse(dateTo);
-				return yql.getStockHistory(symbol, dateFrom, dateTo);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		return null;
+	public List<StockHistory> getStockHistory(@PathVariable String symbol) {
+		Date now = new Date();
+		Calendar fromCal = Calendar.getInstance();
+		fromCal.setTime(now);
+		fromCal.add(Calendar.MONTH, -1);
+		
+		String dateFrom = dateFormat.format(fromCal.getTime());
+		String dateTo = dateFormat.format(now);
+		return yql.getStockHistory(symbol, dateFrom, dateTo);
 	}
 
 	@RequestMapping(value = "/stocks/{symbol}", method = RequestMethod.POST)

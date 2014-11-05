@@ -1,0 +1,65 @@
+@CHARSET "ISO-8859-1";
+
+
+#top {
+	padding: 20px 0;
+	background: #333;
+	color: white;
+}
+
+#top .btn {
+	width: 100%;
+	background: #177EE5;
+	border-color: #1072D3;
+	color: white;
+	font-weight: bold;
+	text-shadow: 1px 1px #666;
+}
+
+#top .btn:hover, #top .btn:focus {
+	background: #1072D3;
+}
+
+#middle {
+	margin-top: 20px;
+}
+
+#middle .stockOverview {
+	padding: 0;
+	margin: 0;
+}
+
+#middle .stockOverview li {
+	list-style: none;
+	padding: 0px;
+	font-weight: bold;
+	cursor: pointer;
+	margin: 0;
+}
+
+#middle .stockOverview li:not(:last-child) {
+	border-bottom: 1px solid #ccc;
+}
+
+#middle .stockOverview li:hover {
+	background: #f5f5f5;
+}
+
+#middle .stockOverview .clickStockDiv {
+	padding: 10px;
+}
+
+.contentwrapper {
+	background: #eee;
+	border: 2px solid #ccc;
+	border-radius: 5px;
+	padding: 0;
+}
+
+.red {
+	color: red;
+}
+
+.green {
+	color: green;
+}
