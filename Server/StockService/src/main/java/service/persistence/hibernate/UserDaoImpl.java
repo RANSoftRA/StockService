@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import service.persistence.UserDao;
+import service.persistence.domain.User;
 import service.persistence.domain.UserSession;
 
 @Repository
@@ -33,6 +34,11 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 	public boolean getUserByName(String name) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public void saveOrUpdateUser(User user) {
+		getCurrentSession().saveOrUpdate(user);
 	}
 
 }

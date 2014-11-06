@@ -49,6 +49,9 @@ function TopController($scope, $http) {
 
 function MiddleController($scope, $http) {
 
+	var canvasGraph = new CanvasGraph();
+	
+	
 	// Calling to get all Stocks
 	$http.get("/finance/stocks").success(
 			function(data, status, headers, config) {
@@ -61,7 +64,7 @@ function MiddleController($scope, $http) {
 
 		$http.get("/finance/stocks/" + stock.symbol + "/history").success(
 				function(data, status, headers, config) {
-					$scope.stockHistory = angular.fromJson(data);
+					canvasGraph.draw(angular.fromJson(data));
 				});
 
 	};
