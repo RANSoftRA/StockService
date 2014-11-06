@@ -3,9 +3,11 @@
 <head>
 <script type="text/javascript" src="js/angularjs.min.js"></script>
 <script type="text/javascript" src="js/application.js"></script>
+<script type="text/javascript" src="js/canvas.js"></script>
 <link rel="stylesheet" href="css/bootstrap.min.css"></link>
 <link rel="stylesheet" href="css/style.css"></link>
 <title>Webclient StockService - Group 1</title>
+
 </head>
 <body>
 	<!-- Top Div ist für das Login notwendig - Möglicherweis -->
@@ -30,6 +32,12 @@
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-md-12">
+						
+						<canvas id="graph" width="600" height="400">   
+						</canvas> 			
+						<script>
+							draw();
+						</script>						
 							Hier kommt das Canvas zum Zeichnen
 							<p>{{stockHistory}}</p>
 						</div>
