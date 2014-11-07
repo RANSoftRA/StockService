@@ -31,35 +31,55 @@ CanvasGraph.prototype.draw = function(data) {
 	c.stroke();
 
 	// Draw the X value texts
-	for (var i = 0; i < data.length; i++) {
-		c.fillText(data[i].date.substring(5), this.getXPixel(i), this.graph.height - this.yPadding + 20);
+	var pos = 0;
+	for (var i = (this.data.length-1); i>=0 ; i--) {
+		c.fillText(this.data[i].date.substring(5), this.getXPixel(pos), this.graph.height - this.yPadding + 20);
+		pos++;
 	}
 
 	// Draw the Y value texts
 	c.textAlign = "right"
 	c.textBaseline = "middle";
-
-	for (var i = 0; i < this.getMaxY(); i += 10) {
+	
+	//set spacing on Y 
+	var ySpacing;
+	if(this.getMaxY()>300){
+		ySpacing=30;
+	}else if(this.getMaxY()>100){
+		ySpacing=20;
+	}else if(this.getMaxY()>50){
+		ySpacing=10;	
+	}else{
+		ySpacing=5;	
+	}
+	
+	//write Y values
+	for (var i = 0; i < this.getMaxY(); i += ySpacing) {
 		c.fillText(i, this.xPadding - 10, this.getYPixel(i));
 	}
+				
+	
 
 	c.strokeStyle = '#f00';
 
 	// Draw the line graph
 	c.beginPath();
-	c.moveTo(this.getXPixel(0), this.getYPixel(data[0].value));
-	for (var i = 1; i < data.length; i++) {
-		c.lineTo(this.getXPixel(i), this.getYPixel(data[i].value));
+	c.moveTo(this.getXPixel(0), this.getYPixel(data[data.length-1].value));
+	pos = 0;
+	for (var i = data.length-1; i >0; i--) {
+		c.lineTo(this.getXPixel(pos), this.getYPixel(data[i].value));
+		pos++;
 	}
 	c.stroke();
 
 	// Draw the dots
 	c.fillStyle = '#333';
-
-	for (var i = 0; i < data.length; i++) {
+	pos = 0;
+	for (var i = (data.length-1); i >0; i--) {
 		c.beginPath();
-		c.arc(this.getXPixel(i), this.getYPixel(data[i].value), 4, 0, Math.PI * 2, true);
+		c.arc(this.getXPixel(pos), this.getYPixel(data[i].value), 4, 0, Math.PI * 2, true);
 		c.fill();
+		pos++;
 	}
 
 }
