@@ -13,75 +13,65 @@
       </controlProperties>
     </control>
     <control controlID="32" controlTypeID="com.balsamiq.mockups::LineChart" x="421" y="155" w="590" h="282" measuredW="187" measuredH="175" zOrder="2" locked="false" isInGroup="-1"/>
-    <control controlID="36" controlTypeID="com.balsamiq.mockups::Button" x="294" y="112" w="73" h="27" measuredW="54" measuredH="27" zOrder="3" locked="false" isInGroup="-1">
-      <controlProperties>
-        <text>Login</text>
-      </controlProperties>
-    </control>
-    <control controlID="39" controlTypeID="com.balsamiq.mockups::Button" x="382" y="112" w="-1" h="-1" measuredW="73" measuredH="27" zOrder="4" locked="false" isInGroup="-1">
-      <controlProperties>
-        <text>Register</text>
-      </controlProperties>
-    </control>
-    <control controlID="40" controlTypeID="com.balsamiq.mockups::TextInput" x="99" y="112" w="-1" h="-1" measuredW="76" measuredH="27" zOrder="5" locked="false" isInGroup="-1">
-      <controlProperties>
-        <text>Username</text>
-      </controlProperties>
-    </control>
-    <control controlID="41" controlTypeID="com.balsamiq.mockups::TextInput" x="186" y="112" w="93" h="-1" measuredW="70" measuredH="27" zOrder="6" locked="false" isInGroup="-1">
-      <controlProperties>
-        <text>Password</text>
-      </controlProperties>
-    </control>
-    <control controlID="43" controlTypeID="com.balsamiq.mockups::DataGrid" x="99" y="493" w="266" h="282" measuredW="289" measuredH="111" zOrder="7" locked="false" isInGroup="-1">
+    <control controlID="43" controlTypeID="com.balsamiq.mockups::DataGrid" x="99" y="493" w="266" h="282" measuredW="289" measuredH="111" zOrder="3" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Name%5E%2C%20Typ%5E%2C%20Menge%5E%2C%20Preis%5E%2C%20Datum%5E%0ASAP%0AGOOGLE%0AFACEBOOK%0A%7B100L%7D</text>
       </controlProperties>
     </control>
-    <control controlID="44" controlTypeID="com.balsamiq.mockups::SubTitle" x="99" y="466" w="-1" h="-1" measuredW="154" measuredH="27" zOrder="8" locked="false" isInGroup="-1">
+    <control controlID="44" controlTypeID="com.balsamiq.mockups::SubTitle" x="99" y="466" w="-1" h="-1" measuredW="154" measuredH="27" zOrder="4" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Transaktionen</text>
       </controlProperties>
     </control>
-    <control controlID="45" controlTypeID="com.balsamiq.mockups::DataGrid" x="421" y="493" w="325" h="282" measuredW="278" measuredH="111" zOrder="9" locked="false" isInGroup="-1">
+    <control controlID="45" controlTypeID="com.balsamiq.mockups::DataGrid" x="421" y="493" w="325" h="282" measuredW="278" measuredH="111" zOrder="5" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Name%5E%2C%20Menge%5E%2C%20Summe%5E%2C%20Verkaufen%0ASAP%0AGOOGLE%0AFACEBOOK%0A%7B100L%7D</text>
       </controlProperties>
     </control>
-    <control controlID="46" controlTypeID="com.balsamiq.mockups::SubTitle" x="421" y="466" w="-1" h="-1" measuredW="87" measuredH="27" zOrder="10" locked="false" isInGroup="-1">
+    <control controlID="46" controlTypeID="com.balsamiq.mockups::SubTitle" x="421" y="466" w="-1" h="-1" measuredW="87" measuredH="27" zOrder="6" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Portfolio</text>
       </controlProperties>
     </control>
-    <control controlID="47" controlTypeID="com.balsamiq.mockups::RadioButton" x="697" y="516" w="-1" h="-1" measuredW="16" measuredH="21" zOrder="11" locked="false" isInGroup="-1">
+    <control controlID="47" controlTypeID="com.balsamiq.mockups::RadioButton" x="697" y="516" w="-1" h="-1" measuredW="16" measuredH="21" zOrder="7" locked="false" isInGroup="-1">
       <controlProperties>
         <text/>
       </controlProperties>
     </control>
-    <control controlID="48" controlTypeID="com.balsamiq.mockups::RadioButton" x="697" y="545" w="-1" h="-1" measuredW="16" measuredH="21" zOrder="12" locked="false" isInGroup="-1">
+    <control controlID="48" controlTypeID="com.balsamiq.mockups::RadioButton" x="697" y="545" w="-1" h="-1" measuredW="16" measuredH="21" zOrder="8" locked="false" isInGroup="-1">
       <controlProperties>
         <text/>
       </controlProperties>
     </control>
-    <control controlID="49" controlTypeID="com.balsamiq.mockups::RadioButton" x="697" y="578" w="-1" h="-1" measuredW="16" measuredH="21" zOrder="13" locked="false" isInGroup="-1">
+    <control controlID="49" controlTypeID="com.balsamiq.mockups::RadioButton" x="697" y="578" w="-1" h="-1" measuredW="16" measuredH="21" zOrder="9" locked="false" isInGroup="-1">
       <controlProperties>
         <text/>
       </controlProperties>
     </control>
-    <control controlID="50" controlTypeID="com.balsamiq.mockups::SubTitle" x="838" y="466" w="-1" h="-1" measuredW="173" measuredH="27" zOrder="14" locked="false" isInGroup="-1">
+    <control controlID="50" controlTypeID="com.balsamiq.mockups::SubTitle" x="838" y="466" w="-1" h="-1" measuredW="173" measuredH="27" zOrder="10" locked="false" isInGroup="-1">
       <controlProperties>
         <text>neues%20Passwort</text>
       </controlProperties>
     </control>
-    <control controlID="51" controlTypeID="com.balsamiq.mockups::TextInput" x="865" y="511" w="146" h="-1" measuredW="79" measuredH="26" zOrder="15" locked="false" isInGroup="-1">
+    <control controlID="51" controlTypeID="com.balsamiq.mockups::TextInput" x="865" y="511" w="146" h="-1" measuredW="79" measuredH="26" zOrder="11" locked="false" isInGroup="-1">
       <controlProperties>
         <text/>
       </controlProperties>
     </control>
-    <control controlID="52" controlTypeID="com.balsamiq.mockups::Button" x="920" y="566" w="91" h="33" measuredW="84" measuredH="27" zOrder="16" locked="false" isInGroup="-1">
+    <control controlID="52" controlTypeID="com.balsamiq.mockups::Button" x="920" y="566" w="91" h="33" measuredW="84" measuredH="27" zOrder="12" locked="false" isInGroup="-1">
       <controlProperties>
         <size>14</size>
         <text>speichern</text>
+      </controlProperties>
+    </control>
+    <control controlID="53" controlTypeID="com.balsamiq.mockups::Button" x="948" y="113" w="-1" h="-1" measuredW="63" measuredH="27" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Logout</text>
+      </controlProperties>
+    </control>
+    <control controlID="54" controlTypeID="com.balsamiq.mockups::SubTitle" x="838" y="113" w="-1" h="-1" measuredW="98" measuredH="27" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Hallo%20XY%21</text>
       </controlProperties>
     </control>
   </controls>
