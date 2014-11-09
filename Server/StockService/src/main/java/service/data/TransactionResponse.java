@@ -1,34 +1,38 @@
 package service.data;
 
+import java.util.List;
+
 import service.persistence.domain.Transaction;
 
 public class TransactionResponse {
 	
-	private Transaction transaction;
-	private PortfolioStock portfolioStock;
+	private List<Transaction> transaction;
 	
-	public TransactionResponse(Transaction transaction,
-			PortfolioStock portfolioStock) {
+	private List<PortfolioStock> portfolioStock;
+
+	public TransactionResponse(List<Transaction> transaction,
+			List<PortfolioStock> portfolioStock) {
 		super();
 		this.transaction = transaction;
 		this.portfolioStock = portfolioStock;
 	}
 
-	public Transaction getTransaction() {
+	public List<Transaction> getTransaction() {
 		return transaction;
 	}
 
-	public void setTransaction(Transaction transaction) {
+	public void setTransaction(List<Transaction> transaction) {
 		this.transaction = transaction;
 	}
 
-	public PortfolioStock getPortfolioStock() {
+	public List<PortfolioStock> getPortfolioStock() {
 		return portfolioStock;
 	}
 
-	public void setPortfolioStock(PortfolioStock portfolioStock) {
+	public void setPortfolioStock(List<PortfolioStock> portfolioStock) {
 		this.portfolioStock = portfolioStock;
 	}
+	
 	
 
 }

@@ -5,9 +5,7 @@ import service.persistence.domain.User;
 
 public interface UserDao {
 	
-	boolean isSessionValid(String session);
-	
-	boolean getUserByName(String name);
+	User getUserByName(String name);
 	
 	void saveOrUpdateUser(User user);
 	

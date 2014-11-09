@@ -25,9 +25,6 @@ public class User {
 	
 	@Column(nullable=false)
 	private double balance;
-
-	@OneToMany(mappedBy="user")
-	private Set<UserSession> userSessions;
 	
 	@OneToMany(mappedBy="user")
 	private Set<Transaction> transactions;
@@ -51,15 +48,7 @@ public class User {
 	public long getIdUser() {
 		return idUser;
 	}
-
-	public Set<UserSession> getUserSessions() {
-		return userSessions;
-	}
-
-	public void setUserSessions(Set<UserSession> userSessions) {
-		this.userSessions = userSessions;
-	}
-
+	
 	public double getBalance() {
 		return balance;
 	}

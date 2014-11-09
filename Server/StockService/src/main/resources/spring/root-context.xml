@@ -12,6 +12,7 @@
 	<context:annotation-config />
 	<context:component-scan base-package="service" />
 	<import resource="data-context.xml" />
+	<import resource="security-context.xml"/>
 
 	<mvc:annotation-driven>
 		<mvc:message-converters>

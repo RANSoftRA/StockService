@@ -26,7 +26,7 @@ Calls:
 (3) /users?un=username&pw=password
 (4) /secured/users/{username}&pw=pw
 (5) /secured/users/{username}/transactions
-(6) /secured/finance/stocks/{stocksymbol}/transactions?amount=20&isSell=true/false
+(6) /secured/finance/transactions?stocksymbol=iwie&amount=20&isSell=true/false
 
 
 ** Alle Calls unter /secured müssen einen HTTP-Basic Authentication header mitschicken.

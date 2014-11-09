@@ -61,6 +61,7 @@ public class YQLServiceImpl implements YQLService {
 
 	@Override
 	public List<Stock> getAllStocks() {
+		
 		// Build the query
 		String allSymbols = "";
 		for (String symbol : symbols) {
