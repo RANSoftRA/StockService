@@ -41,13 +41,13 @@ Responses:
 	error: Objekt: code=6000, message=Generic Error Message
 	error: Objekt: code=7000, message=UN already exists
 	error: Objekt: code=7001, message=Password not valid
-(4) success: Objekt [Transaktion{symbol, name, amount, data, price, type}, [PortfolioStock{symbol, name, amount, balance}]
+(4) success: Objekt [Transaktion{symbol, name, amount, date, price, type}, [PortfolioStock{symbol, name, amount, balance}]
 	error: Objekt: code=6000, message=Generic Error Message
 	error: Objekt: code=7001, message=Password not valid
-(5) success: Objekt: [Transaktion{symbol, name, amount, data, price, type}, [PortfolioStock{symbol, name, amount, balance}]
+(5) success: Objekt: [Transaktion{symbol, name, amount, date, price, type}, [PortfolioStock{symbol, name, amount, balance}]
 	error: Objekt: code=6000, message=Generic Error Message
 	error: Objekt: code=7002, message=Wrong Credentials
-(6) success: Objekt: [Transaktion{symbol, name, amount, data, price, type}, [PortfolioStock{symbol, name, amount, balance}]
+(6) success: Objekt: [Transaktion{symbol, name, amount, date, price, type}, [PortfolioStock{symbol, name, amount, balance}]
 	error: Objekt: code=6000, message=Generic Error Message
 	error: Objekt: code=8000, message=Not enough money
 	error: Objekt: code=8001, message=Not enough stocks available
