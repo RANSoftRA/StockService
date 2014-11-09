@@ -56,4 +56,9 @@ public class SecuredController {
 	public TransactionResponse getUserTransactions() {
 		return null;
 	}
+	
+	@RequestMapping(value = "/users/{username}", method = RequestMethod.PUT)
+	public TransactionResponse updateUser() {
+		return null;
+	}
 }

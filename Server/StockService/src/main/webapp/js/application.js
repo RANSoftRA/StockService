@@ -133,6 +133,7 @@ stockServiceClient.directive('registered', function() {
 // Controllers
 stockServiceClient.controller("TopController", ['Auth', '$scope', '$http',
 		function(Auth, $scope, $http) {
+	
 			$scope.loggedIn = false;
 
 			$scope.login = function(username, password) {

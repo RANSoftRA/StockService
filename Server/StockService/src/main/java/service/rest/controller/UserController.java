@@ -17,7 +17,7 @@ public class UserController {
 	private UserDao userDao;
 
 
-	@RequestMapping(value = "/{username}", method = RequestMethod.POST)
+	@RequestMapping(value = "", method = RequestMethod.POST)
 	public AuthenticationResponse registerUser(
 			@RequestParam(value = "un", required=true) String username,
 			@RequestParam(value = "pw", required=true) String password) {
