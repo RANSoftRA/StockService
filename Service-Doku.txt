@@ -18,7 +18,7 @@ Meeting am 04.11.2014:
   (3) POST - Register User (Hinzufügen)
   (4) PUT - Update User
   (5) GET - User Transactions
-  (6) POST - Add Transaction - Buy of Sell
+  (6) POST - Add Transaction - Buy or Sell
   
 Calls:
 (1) /finance/stocks

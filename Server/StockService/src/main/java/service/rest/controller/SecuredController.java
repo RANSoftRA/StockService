@@ -24,41 +24,43 @@ public class SecuredController {
 
 	@Autowired
 	private TransactionDao transactionDao;
-	
+
 	@Autowired
 	private UserDao userDao;
-	
+
 	@Autowired
 	private YQLService yql;
-	
+
 	@RequestMapping(value = "/finance/transactions", method = RequestMethod.POST)
 	@Transactional
 	public TransactionResponse addTransaction(
-			@RequestParam(value = "stocksymbol" , required=true) String symbol,
+			@RequestParam(value = "stocksymbol", required = true) String symbol,
 			@RequestParam(value = "amount", required = true) int amount,
 			@RequestParam(value = "type", required = true) boolean isSell) {
-		
-		TransactionType transType = isSell ? TransactionType.SELL : TransactionType.BUY;
-		
-		String principal = SecurityContextHolder.getContext().getAuthentication().getName();
-		
+
+		TransactionType transType = isSell ? TransactionType.SELL
+				: TransactionType.BUY;
+
+		String principal = SecurityContextHolder.getContext()
+				.getAuthentication().getName();
+
 		User user = userDao.getUserByName(principal);
-		
+
 		transactionDao.saveOrUpdateTransaction(new Transaction(symbol, amount,
-				new Date(), yql.getCurrentPrice(symbol),
-				transType, user));
-		
+				new Date(), yql.getCurrentPrice(symbol), transType, user));
+
 		return new TransactionResponse(null, null);
 	}
-	
+
 	@Transactional
 	@RequestMapping(value = "/users/{username}/transactions", method = RequestMethod.GET)
 	public TransactionResponse getUserTransactions() {
 		return null;
 	}
-	
+
 	@RequestMapping(value = "/users/{username}", method = RequestMethod.PUT)
-	public TransactionResponse updateUser() {
+	public TransactionResponse updateUser(
+			@RequestParam(value = "pw", required = true) String password) {
 		return null;
 	}
 }
