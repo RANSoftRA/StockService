@@ -1,0 +1,13 @@
+REST Dokumentation / Vergleich und Erfahrungen (lt. Angabe): Olivia
+Dokumenation unserer API: Olivia
+Android Client - Services (Kommunikation zum Server): Thomas / Rainer
+Android Client - UI: Alexander / Rainer
+Android Projekt aufsetzen: Rainer
+Server - Sonstige Anpassungen: Rainer
+
+Sonstige Anmerkungen:
+
+Verwendung von Spring Android und Maven.
+Support ab Android 4.0
+
+
