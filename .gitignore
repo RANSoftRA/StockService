@@ -12,3 +12,4 @@
 hs_err_pid*
 AndroidClient/StockServiceClient/bin/.gitignore
 Thumbs.db
+AndroidClient/StockServiceClient/bin/StockServiceClient.apk

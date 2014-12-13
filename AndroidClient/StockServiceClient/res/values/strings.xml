@@ -4,5 +4,8 @@
     <string name="app_name">StockServiceClient</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_tab1">Stock Overview</string>
+    <string name="title_tab2">Stock Details</string>
+    <string name="title_activity_stock_overview">StockOverview</string>
 
 </resources>
