@@ -34,7 +34,7 @@ public class ListAdapter extends ArrayAdapter<Stock> {
         TextView id = (TextView) convertView.findViewById(R.id.tv_stockId);
         id.setText(stock.getId());
         TextView price = (TextView) convertView.findViewById(R.id.tv_stockPrice);
-        price.setText(stock.getPrice() + "");  
+        price.setText(stock.getPrice() + "   >");  
 
         return convertView;
 	}

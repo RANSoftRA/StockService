@@ -17,8 +17,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnCreateContextMenuListener;
 import android.widget.ListView;
 import android.widget.TabHost;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.stockserviceclient.R;
 
@@ -32,7 +35,9 @@ public class StockOverview extends Activity implements ActionBar.TabListener {
 	 * {@link android.support.v13.app.FragmentStatePagerAdapter}.
 	 */
 	SectionsPagerAdapter mSectionsPagerAdapter;
-
+	
+	ActionBar actionBar;
+	
 	/**
 	 * The {@link ViewPager} that will host the section contents.
 	 */
@@ -44,7 +49,7 @@ public class StockOverview extends Activity implements ActionBar.TabListener {
 		setContentView(R.layout.activity_stock_overview);
 
 		// Set up the action bar.
-		final ActionBar actionBar = getActionBar();
+		actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
 		// Create the adapter that will return a fragment for each of the three
@@ -111,6 +116,9 @@ public class StockOverview extends Activity implements ActionBar.TabListener {
 	
 	public void go_to_details(View view) {
 		
+		mViewPager.setCurrentItem(1);
+
+		//change the content of the stock details fragment here
 		
 	}
 
@@ -127,13 +135,13 @@ public class StockOverview extends Activity implements ActionBar.TabListener {
 		@Override
 		public Fragment getItem(int position) {
 			// getItem is called to instantiate the fragment for the given page.
-			// Return a PlaceholderFragment (defined as a static inner class
+			// Return the respective fragment (defined as a static inner class
 			// below).
 			switch(position) {
 			case 0:
 				return StockOverviewFragment.newInstance(position + 1);
 			case 1: 
-				return DetailsFragment.newInstance(position + 2);
+				return DetailsFragment.newInstance(position + 1);
 			}
 			return null;
 		}
@@ -223,10 +231,7 @@ public class StockOverview extends Activity implements ActionBar.TabListener {
 
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_stock_overview, container, false);
-			
-			
-			
+			View rootView = inflater.inflate(R.layout.fragment_stock_details, container, false);
 			return rootView;
 		}
 	}
