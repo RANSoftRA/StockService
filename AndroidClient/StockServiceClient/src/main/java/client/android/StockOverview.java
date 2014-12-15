@@ -193,11 +193,11 @@ public class StockOverview extends Activity implements ActionBar.TabListener {
 			ListView lvScoringlist = (ListView) rootView.findViewById( R.id.lv_stockOverview );
 		    ArrayList<Stock> userList = new ArrayList<Stock>();
 		    userList.add(new Stock("Stock 1", 10.1));
-		    userList.add(new Stock("Stock 2", 10.2));
+		    userList.add(new Stock("Stock 2", -50.23));
 		    userList.add(new Stock("Stock 3", 10.3));
-		    userList.add(new Stock("Stock 4", 10.4));
-		    userList.add(new Stock("Stock 5", 10.5));
-		    userList.add(new Stock("Stock 6", 10.6));
+		    userList.add(new Stock("Stock 4", -108.48));
+		    userList.add(new Stock("Stock 5", 100.50));
+		    userList.add(new Stock("Stock 6", 100.6));
   
 		    ListAdapter listAdapter = new ListAdapter(inflater.getContext(), R.layout.list_entry, userList);
 
