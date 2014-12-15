@@ -26,6 +26,11 @@ public class ListAdapter extends ArrayAdapter<Stock> {
 		this.ctx = context;
 	}
 
+	//disable highlighting of selected item, as we do that manually
+	public boolean isEnabled(int position) {
+		return false;
+	};
+	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		
@@ -36,16 +41,18 @@ public class ListAdapter extends ArrayAdapter<Stock> {
         TextView tvId = (TextView) convertView.findViewById(R.id.tv_stockId);
         tvId.setText(stock.getId());
         TextView tvPrice = (TextView) convertView.findViewById(R.id.tv_stockPrice);
-        tvPrice.setText(stock.getPrice() + "   >");  
         
-        if(stock.getPrice() < 0)
+        if(stock.getPrice() < 0) {
+        	tvPrice.setText(stock.getPrice() + " $");
         	tvPrice.setTextColor(Color.RED);
-        else
+        }
+        	
+        else {
+        	tvPrice.setText("+" + stock.getPrice() + " $");
         	tvPrice.setTextColor(Color.GREEN);
+        }
         
         return convertView;
 	}
-	
-	
 
 }

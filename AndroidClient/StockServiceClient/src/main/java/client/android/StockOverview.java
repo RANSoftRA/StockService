@@ -2,6 +2,7 @@ package main.java.client.android;
 
 import java.util.ArrayList;
 import java.util.Locale;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
@@ -15,8 +16,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
+
 import com.example.stockserviceclient.R;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.GraphView.GraphViewData;
+import com.jjoe64.graphview.GraphViewSeries;
+import com.jjoe64.graphview.LineGraphView;
 
 public class StockOverview extends Activity implements ActionBar.TabListener {
 
@@ -71,6 +81,7 @@ public class StockOverview extends Activity implements ActionBar.TabListener {
 			// this tab is selected.
 			actionBar.addTab(actionBar.newTab().setText(mSectionsPagerAdapter.getPageTitle(i)).setTabListener(this));
 		}
+		
 	}
 
 	@Override
@@ -112,6 +123,23 @@ public class StockOverview extends Activity implements ActionBar.TabListener {
 		mViewPager.setCurrentItem(1);
 
 		//change the content of the stock details fragment here
+		
+		// init example series data
+		GraphViewSeries exampleSeries = new GraphViewSeries(new GraphViewData[] {
+		    new GraphViewData(1, 2.0d)
+		    , new GraphViewData(2, 1.5d)
+		    , new GraphViewData(3, 5.5d)
+		    , new GraphViewData(4, 1.0d)
+		});
+
+		GraphView graphView = new LineGraphView(
+		    this // context
+		    , "GraphViewDemo" // heading
+		);
+		graphView.addSeries(exampleSeries); // data
+
+		RelativeLayout layout = (RelativeLayout) findViewById(R.id.layout_relativeLayout);
+		layout.addView(graphView);
 		
 	}
 
@@ -183,12 +211,13 @@ public class StockOverview extends Activity implements ActionBar.TabListener {
 			View rootView = inflater.inflate(R.layout.fragment_stock_overview, container, false);
 			
 			ListView lvScoringlist = (ListView) rootView.findViewById( R.id.lv_stockOverview );
+			
 		    ArrayList<Stock> userList = new ArrayList<Stock>();
 		    userList.add(new Stock("Stock 1", 10.1));
 		    userList.add(new Stock("Stock 2", -50.23));
 		    userList.add(new Stock("Stock 3", 10.3));
 		    userList.add(new Stock("Stock 4", -108.48));
-		    userList.add(new Stock("Stock 5", 100.50));
+		    userList.add(new Stock("Stock 5", -90.12345));
 		    userList.add(new Stock("Stock 6", 100.6));
   
 		    ListAdapter listAdapter = new ListAdapter(inflater.getContext(), R.layout.list_entry, userList);
@@ -220,12 +249,11 @@ public class StockOverview extends Activity implements ActionBar.TabListener {
 
 		public DetailsFragment() {
 		}
-
+		
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_stock_details, container, false);
 			return rootView;
 		}
 	}
-	
 }
