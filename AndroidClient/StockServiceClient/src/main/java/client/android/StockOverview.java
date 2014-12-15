@@ -2,9 +2,7 @@ package main.java.client.android;
 
 import java.util.ArrayList;
 import java.util.Locale;
-
 import android.app.ActionBar;
-import android.app.ActionBar.Tab;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -17,12 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnCreateContextMenuListener;
 import android.widget.ListView;
-import android.widget.TabHost;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.example.stockserviceclient.R;
 
 public class StockOverview extends Activity implements ActionBar.TabListener {
@@ -152,7 +145,6 @@ public class StockOverview extends Activity implements ActionBar.TabListener {
 			return 2;
 		}
 
-		@Override
 		public CharSequence getPageTitle(int position) {
 			Locale l = Locale.getDefault();
 			switch (position) {
