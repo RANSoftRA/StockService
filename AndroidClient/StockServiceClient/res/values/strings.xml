@@ -7,12 +7,5 @@
     <string name="title_tab1">Stock Overview</string>
     <string name="title_tab2">Stock Details</string>
     <string name="title_activity_stock_overview">StockOverview</string>
-    
-    <!-- Test Values  -->
-    
-    <string name="id_label">The ID is</string>
-    <string name="id_value">[id]</string>
-    <string name="content_label">The Content is</string>
-    <string name="content_value">[content]</string>
 
 </resources>
