@@ -8,16 +8,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_toStartOf="@+id/tv_stockPrice"
-        android:layout_toLeftOf="@id/tv_stockPrice"
+        android:layout_toStartOf="@+id/tv_stockChange"
+        android:layout_toLeftOf="@id/tv_stockChange"
         android:padding="10dp"
         android:textSize="16sp" 
-        android:clickable="true"
-	    android:onClick="go_to_details"
 	    android:background="@drawable/text_color" />
         
 	<TextView
-	    android:id="@+id/tv_stockPrice"
+	    android:id="@+id/tv_stockChange"
 	    android:layout_width="110dip"
 	    android:layout_height="wrap_content"
 	    android:layout_alignParentEnd="true"

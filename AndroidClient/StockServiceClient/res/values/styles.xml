@@ -16,6 +16,7 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
-    <drawable name="pressed_color">#E6E6E6</drawable>
+    
+     <drawable name="pressed_color">#E6E6E6</drawable>
 
 </resources>

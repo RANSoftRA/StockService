@@ -1,7 +1,8 @@
-package main.java.client.android;
+package com.stockservice.client.layoutadapter;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -10,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.example.stockserviceclient.R;
+import com.stockservice.client.data.Stock;
 
 public class ListAdapter extends ArrayAdapter<Stock> {
 	
@@ -26,33 +27,32 @@ public class ListAdapter extends ArrayAdapter<Stock> {
 		this.ctx = context;
 	}
 
-	//disable highlighting of selected item, as we do that manually
-	public boolean isEnabled(int position) {
-		return false;
-	};
-	
+	@SuppressLint("ViewHolder")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		
-		convertView = ( RelativeLayout ) inflater.inflate( resourceId, null );
+		convertView = (RelativeLayout) inflater.inflate( resourceId, null );
         
-        Stock stock = getItem( position );
+        Stock stock = getItem(position);
         
         TextView tvId = (TextView) convertView.findViewById(R.id.tv_stockId);
-        tvId.setText(stock.getId());
-        TextView tvPrice = (TextView) convertView.findViewById(R.id.tv_stockPrice);
+        tvId.setText(stock.getName());
+        TextView tvChange = (TextView) convertView.findViewById(R.id.tv_stockChange);
+        tvChange.setText(""+stock.getChange());  
         
-        if(stock.getPrice() < 0) {
-        	tvPrice.setText(stock.getPrice() + " $");
-        	tvPrice.setTextColor(Color.RED);
+        if(stock.getChange() < 0) {
+        	tvChange.setText(stock.getChange() + " $");
+        	tvChange.setTextColor(Color.RED);
         }
         	
         else {
-        	tvPrice.setText("+" + stock.getPrice() + " $");
-        	tvPrice.setTextColor(Color.GREEN);
+        	tvChange.setText("+" + stock.getChange() + " $");
+        	tvChange.setTextColor(Color.GREEN);
         }
-        
+
         return convertView;
 	}
+	
+	
 
 }
