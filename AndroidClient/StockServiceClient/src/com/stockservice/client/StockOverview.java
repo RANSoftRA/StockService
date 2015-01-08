@@ -409,7 +409,8 @@ public class StockOverview extends Activity implements TabListener {
 	            	GraphViewData[] data = new GraphViewData[arrayLength];
 	            	String[] horizontalLabels;
 	            	int[] days = new int[arrayLength]; 
-	            	int[] months = new int[arrayLength];;
+	            	int[] months = new int[arrayLength];
+	            	double[] values = new double[arrayLength];
 	            	int position = 1;
 	            	
 	            	//loop through stock history and add every fifth and the last value to the data series (actually to another array at first to switch the values later on)
@@ -425,8 +426,6 @@ public class StockOverview extends Activity implements TabListener {
 	            		stringDate = s.getDate();
 	            		value = s.getValue();
 	            		
-	            		Log.d("date", stringDate);
-	            		
 	            		try {
 	            			d = formatter.parse(stringDate);
 	            			cal.setTime(d);
@@ -437,9 +436,8 @@ public class StockOverview extends Activity implements TabListener {
 	            		}
 	            		
 	            		days[arrayLength - position ] = day;
-	            		Log.d("days: ", "" + days[arrayLength - position]);
 	            		months[arrayLength - position] = month;
-	            		Log.d("months: ", "" + months[arrayLength - position]);
+	            		values[arrayLength - position] = value;
 	            				
 	            		//zuerst array umdrehen und dann einfüllen
 	            		
@@ -449,10 +447,9 @@ public class StockOverview extends Activity implements TabListener {
 	            	//fill the data into the actual output array
 	            	for (int j = 0; j < arrayLength; j++) {
 	            		
-	            		Log.d("test", "yes");
-	            		
 	            		day = days[j];
 	            		month = months[j];
+	            		value = values[j];
 	            		
 	            		if (day < dayBefore)
 	            			day = (dayBefore + 7);
@@ -475,11 +472,6 @@ public class StockOverview extends Activity implements TabListener {
 	            	horizontalLabels = new String[]{month + "-01", month + "-08", month + "-15", month + "-22", month + "-29"};
 	            	
 	            	lineGraph.setHorizontalLabels(horizontalLabels);
-	            	
-	            	for (GraphViewData x : data)
-            		{ 
-            			Log.d("blabla", x.getX() + "");
-            		}
 	            	
 	            	GraphViewSeries dataSeries = new GraphViewSeries(data);
 	            	
