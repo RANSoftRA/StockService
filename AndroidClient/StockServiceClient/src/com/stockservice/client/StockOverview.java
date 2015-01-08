@@ -407,7 +407,7 @@ public class StockOverview extends Activity implements TabListener {
 	            	int arrayLength = 5;
 	            	int loopLength = history.size();
 	            	GraphViewData[] data = new GraphViewData[arrayLength];
-	            	String[] horizontalLabels;
+	            	String[] horizontalLabels = new String[arrayLength];
 	            	int[] days = new int[arrayLength]; 
 	            	int[] months = new int[arrayLength];
 	            	double[] values = new double[arrayLength];
@@ -451,6 +451,8 @@ public class StockOverview extends Activity implements TabListener {
 	            		month = months[j];
 	            		value = values[j];
 	            		
+	            		horizontalLabels[j] = month + "-" + day;
+	            		
 	            		if (day < dayBefore)
 	            			day = (dayBefore + 7);
 		            	
@@ -468,8 +470,6 @@ public class StockOverview extends Activity implements TabListener {
 	            	}
 	            	
 	            	lineGraph.setTitle(stockSymbol);
-	            	
-	            	horizontalLabels = new String[]{month + "-01", month + "-08", month + "-15", month + "-22", month + "-29"};
 	            	
 	            	lineGraph.setHorizontalLabels(horizontalLabels);
 	            	
