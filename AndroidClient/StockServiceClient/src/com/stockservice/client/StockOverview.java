@@ -370,7 +370,7 @@ public class StockOverview extends Activity implements TabListener {
 			return rootView;
 		}
 		
-		public class StockDetailTask extends AsyncTask<Void, Void, List<StockHistory>> {  
+		private class StockDetailTask extends AsyncTask<Void, Void, List<StockHistory>> {  
 			
 			@Override
 	        protected List<StockHistory> doInBackground(Void... params) {					
@@ -395,10 +395,11 @@ public class StockOverview extends Activity implements TabListener {
 	            	//clear old data
 	            	lineGraph.removeAllSeries();
 	            	
-	            	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+	            	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	            	String stringDate = "";
 	            	Calendar cal = Calendar.getInstance();
 	            	Date d;
+	            	int dayBefore = 0;
 	            	int day = 0;
 	            	int month = 0;
 	            	double date = 0.0;
@@ -407,9 +408,11 @@ public class StockOverview extends Activity implements TabListener {
 	            	int loopLength = history.size();
 	            	GraphViewData[] data = new GraphViewData[arrayLength];
 	            	String[] horizontalLabels;
-	            	int pos = 1;
+	            	int[] days = new int[arrayLength]; 
+	            	int[] months = new int[arrayLength];;
+	            	int position = 1;
 	            	
-	            	//loop through stock history and add every fifth and the last value to the data series
+	            	//loop through stock history and add every fifth and the last value to the data series (actually to another array at first to switch the values later on)
 	            	for(int i = 0; i <= loopLength; i += 5) {
 	            		
 	            		//necessary because values cannot be equally divided
@@ -422,18 +425,41 @@ public class StockOverview extends Activity implements TabListener {
 	            		stringDate = s.getDate();
 	            		value = s.getValue();
 	            		
+	            		Log.d("date", stringDate);
+	            		
 	            		try {
 	            			d = formatter.parse(stringDate);
 	            			cal.setTime(d);
 	            			day = cal.get(Calendar.DAY_OF_MONTH);
-	            			month = cal.get(Calendar.MONTH);
-	            			if(month == 0)
-	            				month = 12;
+	            			month = (cal.get(Calendar.MONTH) + 1);
 	            		} catch (ParseException e) {
 	            			e.printStackTrace();
 	            		}
 	            		
-            			stringDate = day + "." + month;
+	            		days[arrayLength - position ] = day;
+	            		Log.d("days: ", "" + days[arrayLength - position]);
+	            		months[arrayLength - position] = month;
+	            		Log.d("months: ", "" + months[arrayLength - position]);
+	            				
+	            		//zuerst array umdrehen und dann einfüllen
+	            		
+	            		position++;
+	            	}
+	            	
+	            	//fill the data into the actual output array
+	            	for (int j = 0; j < arrayLength; j++) {
+	            		
+	            		Log.d("test", "yes");
+	            		
+	            		day = days[j];
+	            		month = months[j];
+	            		
+	            		if (day < dayBefore)
+	            			day = (dayBefore + 7);
+		            	
+		            	dayBefore = day;
+	            		
+	        			stringDate = day + "." + month;
 	            		
 	            		try {
 	            			date = Double.parseDouble(stringDate);
@@ -441,12 +467,9 @@ public class StockOverview extends Activity implements TabListener {
 	            			e.printStackTrace();
 	            		}
 	            		
-	            		data[arrayLength - pos] = new GraphViewData(date, value);
-	            				
-	            		pos++;
-	            		
+	            		data[j] = new GraphViewData(date, value);
 	            	}
-
+	            	
 	            	lineGraph.setTitle(stockSymbol);
 	            	
 	            	horizontalLabels = new String[]{month + "-01", month + "-08", month + "-15", month + "-22", month + "-29"};
@@ -454,7 +477,7 @@ public class StockOverview extends Activity implements TabListener {
 	            	lineGraph.setHorizontalLabels(horizontalLabels);
 	            	
 	            	for (GraphViewData x : data)
-            		{
+            		{ 
             			Log.d("blabla", x.getX() + "");
             		}
 	            	
