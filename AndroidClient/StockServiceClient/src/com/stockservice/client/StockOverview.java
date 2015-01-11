@@ -354,9 +354,6 @@ public class StockOverview extends Activity implements TabListener {
 			RelativeLayout layout = (RelativeLayout) rootView.findViewById(R.id.layout_relativeLayout);
 			layout.addView(lineGraph);	
 			
-//			dummyDatGen = new DummyDataGenerator();
-//			detailText.setText(dummyDatGen.getHistoryText());
-			
 			try {
 				new StockDetailTask().execute().get(6, TimeUnit.SECONDS);
 			} catch (InterruptedException e) {
@@ -476,9 +473,6 @@ public class StockOverview extends Activity implements TabListener {
 	            	GraphViewSeries dataSeries = new GraphViewSeries(data);
 	            	
 	    			lineGraph.addSeries(dataSeries); // data
-	            	
-//	            	detailText = (TextView) rootView.findViewById(R.id.tv_textDetail);
-//	            	detailText.setText(historyAsText);
 	            	
 	            }else{
 	            	Toast.makeText(getActivity(), "Daten konnten nicht geladen werden!", Toast.LENGTH_LONG).show();
