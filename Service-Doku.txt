@@ -25,7 +25,7 @@ Calls:
 (2) /finance/stocks/{stocksymbol}/history
 (3) /users?un=username&pw=password
 (4) /secured/users/{username}&pw=pw
-(5) /secured/users/{username}/transactions
+(5) /secured/finance/transactions
 (6) /secured/finance/transactions?stocksymbol=iwie&amount=20&isSell=true/false
 
 
