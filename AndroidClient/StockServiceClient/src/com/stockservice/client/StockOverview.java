@@ -70,18 +70,18 @@ public class StockOverview extends Activity implements TabListener {
 	//the currently chosen stockSymbol
 	protected static String stockSymbol = "YHOO";
 	
-	public final static String URL = "http://192.168.0.2:8080";
+	private static final String URL = "http://192.168.0.2:8080";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_stock_overview);	
-		
+
 		// Set up the action bar.
 		actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-		// Create the adapter that will return a fragment for each of the three
+		// Create the adapter that will return a fragment for each of the two
 		// primary sections of the activity.
 		mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
 		
@@ -160,7 +160,7 @@ public class StockOverview extends Activity implements TabListener {
 			// below).
 			switch(position) {
 			case 0:
-				return StockOverviewFragment.newInstance(position + 1);
+				return StockOverviewFragment.getInstance(position + 1);
 			case 1: 
 				return DetailsFragment.getInstance(position + 1);
 			}
@@ -199,26 +199,29 @@ public class StockOverview extends Activity implements TabListener {
 		
 		private LayoutInflater inflater;
 		
-		private ViewGroup container;
-		
 		private View rootView;
 		
 		private ListView lv;		
 		
+		private static StockOverviewFragment fragment;
+		
 		/**
 		 * Returns a new instance of this fragment for the given section number.
 		 */
-		public static StockOverviewFragment newInstance(int sectionNumber) {
-			StockOverviewFragment fragment = new StockOverviewFragment();
+		private static StockOverviewFragment newInstance(int sectionNumber) {
+			fragment = new StockOverviewFragment();
 			Bundle args = new Bundle();
 			args.putInt(ARG_SECTION_NUMBER, sectionNumber);
 			fragment.setArguments(args);
-						
 			return fragment;
 		}
 
-		public StockOverviewFragment() {
-		
+		public static StockOverviewFragment getInstance(int sectionNumber)
+		{
+			if(fragment != null)
+				return fragment;
+			else
+				return newInstance(sectionNumber);
 		}
 
 		@Override
@@ -248,6 +251,30 @@ public class StockOverview extends Activity implements TabListener {
 					e.printStackTrace();
 				}
 			return rootView;
+		}
+		
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long itemId) {
+			
+			lv = (ListView) rootView.findViewById(R.id.lv_stockOverview);
+			
+			Stock stock = (Stock) lv.getItemAtPosition((int) itemId);
+			stockSymbol = stock.getSymbol();
+			mViewPager.setCurrentItem(1);
+			
+			try {
+				//always 2, isn't used anyway
+				DetailsFragment.getInstance(2).new StockDetailTask().execute().get(6, TimeUnit.SECONDS);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ExecutionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (TimeoutException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		private class StockLoaderTask extends AsyncTask<Void, Void, List<Stock>> {  
@@ -280,30 +307,6 @@ public class StockOverview extends Activity implements TabListener {
 	            }  
 	        }
 	    }
-
-		@Override
-		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long itemId) {
-			
-			lv = (ListView) rootView.findViewById(R.id.lv_stockOverview);
-			
-			Stock stock = (Stock) lv.getItemAtPosition((int) itemId);
-			stockSymbol = stock.getSymbol();
-			mViewPager.setCurrentItem(1);
-			
-			try {
-				//always 2, isn't used anyway
-				DetailsFragment.getInstance(2).new StockDetailTask().execute().get(6, TimeUnit.SECONDS);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ExecutionException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (TimeoutException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
 	}
 
 	public static class DetailsFragment extends Fragment{
@@ -318,6 +321,7 @@ public class StockOverview extends Activity implements TabListener {
 		
 		LayoutInflater inflater;
 		View rootView;
+		
 		private static DetailsFragment fragment;
 		
 		/**
@@ -349,7 +353,6 @@ public class StockOverview extends Activity implements TabListener {
     			    this.getActivity(), // context
     			    stockSymbol
     			);
-			
 			
 			RelativeLayout layout = (RelativeLayout) rootView.findViewById(R.id.layout_relativeLayout);
 			layout.addView(lineGraph);	
@@ -386,7 +389,7 @@ public class StockOverview extends Activity implements TabListener {
 	        @SuppressLint("SimpleDateFormat")
 			@Override
 	        protected void onPostExecute(List<StockHistory> historyList) {
-	        	if(historyList!=null&&historyList.size()!=0){
+	        	if((historyList!=null) && (historyList.size()!=0)){
 	            	ArrayList<StockHistory> history = new ArrayList<StockHistory>(historyList);	      
 	            	
 	            	//clear old data
@@ -436,8 +439,6 @@ public class StockOverview extends Activity implements TabListener {
 	            		months[arrayLength - position] = month;
 	            		values[arrayLength - position] = value;
 	            				
-	            		//zuerst array umdrehen und dann einfüllen
-	            		
 	            		position++;
 	            	}
 	            	
@@ -472,7 +473,7 @@ public class StockOverview extends Activity implements TabListener {
 	            	
 	            	GraphViewSeries dataSeries = new GraphViewSeries(data);
 	            	
-	    			lineGraph.addSeries(dataSeries); // data
+	    			lineGraph.addSeries(dataSeries);
 	            	
 	            }else{
 	            	Toast.makeText(getActivity(), "Daten konnten nicht geladen werden!", Toast.LENGTH_LONG).show();

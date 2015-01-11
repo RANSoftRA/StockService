@@ -52,7 +52,4 @@ public class ListAdapter extends ArrayAdapter<Stock> {
 
         return convertView;
 	}
-	
-	
-
 }
