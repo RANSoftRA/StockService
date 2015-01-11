@@ -160,9 +160,9 @@ public class StockOverview extends Activity implements TabListener {
 			// below).
 			switch(position) {
 			case 0:
-				return StockOverviewFragment.getInstance(position + 1);
+				return StockOverviewFragment.newInstance(position + 1);
 			case 1: 
-				return DetailsFragment.getInstance(position + 1);
+				return DetailsFragment.newInstance(position + 1);
 			}
 			return null;
 		}
@@ -191,6 +191,7 @@ public class StockOverview extends Activity implements TabListener {
 		 * fragment.
 		 */
 		private static final String ARG_SECTION_NUMBER = "section_number";	
+		
 		private DummyDataGenerator dummyDatGen;
 		
 		private ListAdapter listAdapter;
@@ -203,25 +204,15 @@ public class StockOverview extends Activity implements TabListener {
 		
 		private ListView lv;		
 		
-		private static StockOverviewFragment fragment;
-		
 		/**
 		 * Returns a new instance of this fragment for the given section number.
 		 */
-		private static StockOverviewFragment newInstance(int sectionNumber) {
-			fragment = new StockOverviewFragment();
+		public static StockOverviewFragment newInstance(int sectionNumber) {
+			StockOverviewFragment fragment = new StockOverviewFragment();
 			Bundle args = new Bundle();
 			args.putInt(ARG_SECTION_NUMBER, sectionNumber);
 			fragment.setArguments(args);
 			return fragment;
-		}
-
-		public static StockOverviewFragment getInstance(int sectionNumber)
-		{
-			if(fragment != null)
-				return fragment;
-			else
-				return newInstance(sectionNumber);
 		}
 
 		@Override
@@ -315,7 +306,6 @@ public class StockOverview extends Activity implements TabListener {
 		 * fragment.
 		 */
 		private static final String ARG_SECTION_NUMBER = "section_number";
-		private DummyDataGenerator dummyDatGen;	
 		
 		private GraphView lineGraph;
 		
@@ -327,7 +317,7 @@ public class StockOverview extends Activity implements TabListener {
 		/**
 		 * Returns a new instance of this fragment for the given section number.
 		 */
-		private static DetailsFragment newInstance(int sectionNumber) {
+		public static DetailsFragment newInstance(int sectionNumber) {
 			fragment = new DetailsFragment();
 			Bundle args = new Bundle();
 			args.putInt(ARG_SECTION_NUMBER, sectionNumber);
