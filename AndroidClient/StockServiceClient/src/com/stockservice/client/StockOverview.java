@@ -70,7 +70,7 @@ public class StockOverview extends Activity implements TabListener {
 	//the currently chosen stockSymbol
 	protected static String stockSymbol = "YHOO";
 	
-	private static final String URL = "http://192.168.0.2:8080";
+	private static final String URL = "http://192.168.0.5:8080";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
