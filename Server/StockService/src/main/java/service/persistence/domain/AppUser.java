@@ -11,11 +11,11 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class User {
+public class AppUser {
 
 	@GeneratedValue
 	@Id
-	private long idUser;
+	private long idAppUser;
 	
 	@Column(nullable=false, unique=true)
 	private String username;
@@ -26,8 +26,8 @@ public class User {
 	@Column(nullable=false)
 	private double balance;
 	
-	@OneToMany(mappedBy="user")
-	private Set<Transaction> transactions;
+	@OneToMany(mappedBy="appUser")
+	private Set<StockTransaction> transactions;
 	
 	public String getUsername() {
 		return username;
@@ -45,8 +45,8 @@ public class User {
 		this.password = password;
 	}
 
-	public long getIdUser() {
-		return idUser;
+	public long getIdAppUser() {
+		return idAppUser;
 	}
 	
 	public double getBalance() {
@@ -57,11 +57,11 @@ public class User {
 		this.balance = balance;
 	}
 
-	public Set<Transaction> getTransactions() {
+	public Set<StockTransaction> getTransactions() {
 		return transactions;
 	}
 
-	public void setTransactions(Set<Transaction> transactions) {
+	public void setTransactions(Set<StockTransaction> transactions) {
 		this.transactions = transactions;
 	}
 	

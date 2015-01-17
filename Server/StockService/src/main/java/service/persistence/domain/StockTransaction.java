@@ -8,11 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table
-public class Transaction {
+@JsonIgnoreProperties("appUser")
+public class StockTransaction {
 
 	@Id
 	@GeneratedValue
@@ -34,19 +35,19 @@ public class Transaction {
 	private TransactionType transactionType;
 	
 	@ManyToOne
-	@JoinColumn(name="idUser", nullable=false)
-	private User user;	
+	@JoinColumn(name="idAppUser", nullable=false)
+	private AppUser appUser;	
 	
 	
-	public Transaction(String stock, int amount, Date date, double price,
-			TransactionType transactionType, User user) {
+	public StockTransaction(String stock, int amount, Date date, double price,
+			TransactionType transactionType, AppUser user) {
 		super();
 		this.stock = stock;
 		this.amount = amount;
 		this.date = date;
 		this.price = price;
 		this.transactionType = transactionType;
-		this.user = user;
+		this.appUser = user;
 	}
 
 	public String getStock() {
@@ -89,12 +90,12 @@ public class Transaction {
 		this.transactionType = transactionType;
 	}
 
-	public User getUser() {
-		return user;
+	public AppUser getAppUser() {
+		return appUser;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setAppUser(AppUser appUser) {
+		this.appUser = appUser;
 	}
 
 	public long getIdTransaction() {

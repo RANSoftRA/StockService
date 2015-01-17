@@ -15,18 +15,16 @@ Meeting am 04.11.2014:
 * Services:
   (1) GET - All stocks
   (2) GET - Stock history (last month/week from now back)
-  (3) POST - Register User (Hinzufügen)
-  (4) PUT - Update User
-  (5) GET - User Transactions
-  (6) POST - Add Transaction - Buy or Sell
+  (3) PUT - Update User
+  (4) GET - User Transactions
+  (5) POST - Add Transaction - Buy or Sell
   
 Calls:
-(1) /finance/stocks
-(2) /finance/stocks/{stocksymbol}/history
-(3) /users?un=username&pw=password
-(4) /secured/users/{username}&pw=pw
-(5) /secured/finance/transactions
-(6) /secured/finance/transactions?stocksymbol=iwie&amount=20&isSell=true/false
+(1) GET - /finance/stocks
+(2) GET - finance/stocks/{stocksymbol}/history
+(3) PUT - /secured/users/{username}&pw=pw
+(4) GET - /secured/finance/transactions
+(5) POST - /secured/finance/transactions?stocksymbol=iwie&amount=20&isSell=true/false
 
 
 ** Alle Calls unter /secured müssen einen HTTP-Basic Authentication header mitschicken.
@@ -37,17 +35,13 @@ Responses:
 	error: Objekt: code=6000, message=Generic Error Message
 (2) success: Liste mit StockHistory Objekten: symbol, date, close
 	error: Objekt: code=6000, message=Generic Error Message
-(3) success: Kein Objekt - Registrierung Erfolgreich
-	error: Objekt: code=6000, message=Generic Error Message
-	error: Objekt: code=7000, message=UN already exists
-	error: Objekt: code=7001, message=Password not valid
-(4) success: Kein Objekt - Leer
+(3) success: Kein Objekt - Leer
 	error: Objekt: code=6000, message=Generic Error Message
 	error: Objekt: code=7001, message=Password not valid
-(5) success: Objekt: [Transaktion{symbol, name, amount, date, price, type}, [PortfolioStock{symbol, name, amount, balance}]
+(4) success: Objekt: [Transaktion{symbol, name, amount, date, price, type}, [PortfolioStock{symbol, name, amount, balance}]
 	error: Objekt: code=6000, message=Generic Error Message
 	error: Objekt: code=7002, message=Wrong Credentials
-(6) success: Objekt: [Transaktion{symbol, name, amount, date, price, type}, [PortfolioStock{symbol, name, amount, balance}]
+(5) success: Objekt: [Transaktion{symbol, name, amount, date, price, type}, [PortfolioStock{symbol, name, amount, balance}]
 	error: Objekt: code=6000, message=Generic Error Message
 	error: Objekt: code=8000, message=Not enough money
 	error: Objekt: code=8001, message=Not enough stocks available

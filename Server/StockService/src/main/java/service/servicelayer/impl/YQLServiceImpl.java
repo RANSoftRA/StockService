@@ -1,4 +1,4 @@
-package service.data.service;
+package service.servicelayer.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,7 +13,9 @@ import service.data.Stock;
 import service.data.StockHistory;
 import service.data.jsonwrapper.YQLQueryWrapper;
 import service.data.jsonwrapper.YQLQuote;
+import service.data.jsonwrapper.YQLSingleQueryWrapper;
 import service.misc.DateFormat;
+import service.servicelayer.YQLService;
 
 @Component
 public class YQLServiceImpl implements YQLService {
@@ -25,17 +27,17 @@ public class YQLServiceImpl implements YQLService {
 
 	@Override
 	public Stock getStock(String symbol) {	
-		String uri = getYqlUri("select * from yahoo.finance.quote where symbol in ("
-				+ symbol + ")");
+		String uri = getYqlUri("select * from yahoo.finance.quote where symbol in (\""
+				+ symbol + "\")");
 		RestTemplate restTemplate = new RestTemplate();
-		YQLQueryWrapper result = restTemplate.getForObject(uri,
-				YQLQueryWrapper.class);
+		YQLSingleQueryWrapper result = restTemplate.getForObject(uri,
+				YQLSingleQueryWrapper.class);
 
-		if (result.getQuery().getResults().getQuote().size() != 1) {
+		if (result != null && result.getQuery().getResults().getQuote() != null) {
 			return null;
 		}
 
-		return new Stock(result.getQuery().getResults().getQuote().get(0));
+		return new Stock(result.getQuery().getResults().getQuote());
 	}
 
 	@Override

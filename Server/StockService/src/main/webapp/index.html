@@ -6,6 +6,8 @@
 <script type="text/javascript" src="js/angularjs.min.js"></script>
 <script type="text/javascript" src="js/angularjs-cookies.min.js"></script>
 <script type="text/javascript" src="js/application.js"></script>
+<script type="text/javascript" src="js/authentication.js"></script>
+<script type="text/javascript" src="js/authInterceptor.js"></script>
 <script type="text/javascript" src="js/canvas.js"></script>
 
 
@@ -16,26 +18,28 @@
 <title>Webclient StockService - Group 1</title>
 
 </head>
-<body>
+<body ng-controller="BodyController">
 	<!-- Top Div ist für das Login notwendig - Möglicherweis -->
-	<div id="top" ng-controller="TopController">
+	<div id="top">
 		<unregistered ng-show="!loggedIn"></unregistered>
 		<registered ng-show="loggedIn"></registered>
 	</div>
 	<div id="middle" class="container" ng-controller="MiddleController">
 		<div class="row">
-			<div class="col-md-4 stockOverview">
+			<div class="col-md-5 stockOverview">
 				<ul>
 					<li ng-repeat="stock in stocks">
 						<div class="clickStockDiv" ng-click="getStockhistory(stock)">
 								{{stock.name}} 
 								<span ng-show="stock.change < 0" class="red pull-right">{{stock.change}} $</span> 
-								<span ng-show="stock.change > 0" class="green pull-right">{{stock.change}} $</span>
+								<span ng-show="stock.change >= 0" class="green pull-right">{{stock.change}} $</span>
+								<input ng-show="loggedIn" type="number" ng-model="stockQuantity" min="0"/>
+								<button ng-show="loggedIn" ng-click="buyStock(stock, stockQuantity)">Buy</button>
 						</div>
 					</li>
 				</ul>
 			</div>
-			<div class="col-md-8" ng-show="currentStock != null">
+			<div class="col-md-7" ng-show="currentStock != null">
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-md-12">
@@ -64,6 +68,36 @@
 						</div>
 					</div>
 				</div>
+				
+			</div>
+		</div>
+	</div>
+	<div class="container" ng-show="loggedIn">
+		<div class="row">
+			<div class="col-md-5">
+				<table>
+					<tr>
+						<th>Name</th>
+						<th>Typ</th>
+						<th>Menge</th>
+						<th>Preis</th>
+						<th>Datum</th>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</table>
+			</div>
+			<div class="col-md-5">
+				<table>
+					<tr></tr>
+				</table>
+			</div>
+			<div class="col-md-2">
 				
 			</div>
 		</div>

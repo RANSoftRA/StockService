@@ -27,10 +27,9 @@
 
 	<!-- Authentication manager. -->
 	<security:authentication-manager alias="authenticationManager">
-		<security:authentication-provider>
-			<security:user-service>
-				<security:user name="bla" password="bla" authorities="ROLE_LOGGEDIN" />
-			</security:user-service>
+		<security:authentication-provider user-service-ref="appUserServiceImpl">
+			<!-- passwords are being encoded with BCrypt -->
+			<security:password-encoder ref="encoder"></security:password-encoder>
 		</security:authentication-provider>
 	</security:authentication-manager>
 
@@ -38,5 +37,9 @@
 		secured-annotations="enabled" jsr250-annotations="enabled"
 		pre-post-annotations="enabled">
 	</security:global-method-security>
+	
+	<!-- BCrypt password encoder -->
+	<bean id="encoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 
 </beans>

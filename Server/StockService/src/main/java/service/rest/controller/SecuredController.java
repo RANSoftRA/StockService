@@ -1,9 +1,7 @@
 package service.rest.controller;
 
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,25 +9,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import service.data.TransactionResponse;
-import service.data.service.YQLService;
-import service.persistence.TransactionDao;
-import service.persistence.UserDao;
-import service.persistence.domain.Transaction;
-import service.persistence.domain.Transaction.TransactionType;
-import service.persistence.domain.User;
+import service.servicelayer.AppUserService;
+import service.servicelayer.TransactionService;
+import service.servicelayer.YQLService;
 
 @RestController
 @RequestMapping("/secured")
+@Secured("ROLE_LOGGEDIN")
 public class SecuredController {
 
 	@Autowired
-	private TransactionDao transactionDao;
+	private TransactionService securedService;
 
 	@Autowired
-	private UserDao userDao;
+	private AppUserService appUserSerive;
 
 	@Autowired
-	private YQLService yql;
+	private YQLService yqlService;
 
 	@RequestMapping(value = "/finance/transactions", method = RequestMethod.POST)
 	@Transactional
@@ -38,29 +34,19 @@ public class SecuredController {
 			@RequestParam(value = "amount", required = true) int amount,
 			@RequestParam(value = "type", required = true) boolean isSell) {
 
-		TransactionType transType = isSell ? TransactionType.SELL
-				: TransactionType.BUY;
-
-		String principal = SecurityContextHolder.getContext()
-				.getAuthentication().getName();
-
-		User user = userDao.getUserByName(principal);
-
-		transactionDao.saveOrUpdateTransaction(new Transaction(symbol, amount,
-				new Date(), yql.getCurrentPrice(symbol), transType, user));
-
-		return new TransactionResponse(null, null);
+		return securedService.addTransaction(symbol, amount, isSell);
 	}
 
 	@Transactional
-	@RequestMapping(value = "/users/{username}/transactions", method = RequestMethod.GET)
+	@RequestMapping(value = "/finance/transactions", method = RequestMethod.GET)
 	public TransactionResponse getUserTransactions() {
-		return null;
+		return appUserSerive.getAuthenticatedUserTransactions();
 	}
 
 	@RequestMapping(value = "/users/{username}", method = RequestMethod.PUT)
 	public TransactionResponse updateUser(
 			@RequestParam(value = "pw", required = true) String password) {
-		return null;
+		
+		return appUserSerive.setUserPassword(password);
 	}
 }

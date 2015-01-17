@@ -1,10 +1,15 @@
 package service.persistence;
 
-import service.persistence.domain.Transaction;
+import java.util.List;
+
+import service.persistence.domain.AppUser;
+import service.persistence.domain.StockTransaction;
 
 
 public interface TransactionDao {
 	
-	public void saveOrUpdateTransaction(Transaction t);		
+	void saveOrUpdateTransaction(StockTransaction t);		
 
+	List<StockTransaction> getTransactions(AppUser user);
+	
 }

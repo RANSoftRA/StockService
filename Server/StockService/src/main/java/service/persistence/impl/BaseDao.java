@@ -1,4 +1,4 @@
-package service.persistence.hibernate;
+package service.persistence.impl;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

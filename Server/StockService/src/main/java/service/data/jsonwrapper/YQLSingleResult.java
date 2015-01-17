@@ -1,21 +1,20 @@
 package service.data.jsonwrapper;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
-public class YQLResult {
+public class YQLSingleResult {
 	
-	private List<YQLQuote> quote;
-	
-	public List<YQLQuote> getQuote() {
+	private YQLQuote quote;
+
+	public YQLQuote getQuote() {
 		return quote;
 	}
-	
-	public void setQuote(List<YQLQuote> quote) {
+
+	public void setQuote(YQLQuote quote) {
 		this.quote = quote;
 	}
+	
 	
 	
 }
