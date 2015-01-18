@@ -23,7 +23,7 @@ public class SecuredController {
 	private TransactionService transactionService;
 
 	@Autowired
-	private AppUserService appUserSerive;
+	private AppUserService appUserService;
 
 	@Autowired
 	private YQLService yqlService;
@@ -41,13 +41,13 @@ public class SecuredController {
 	@Transactional
 	@RequestMapping(value = "/finance/transactions", method = RequestMethod.GET)
 	public PortfolioResponse getUserTransactions() {
-		return appUserSerive.getAuthenticatedUserTransactions();
+		return appUserService.getAuthenticatedUserTransactions();
 	}
 
 	@RequestMapping(value = "/users/{username}", method = RequestMethod.PUT)
 	public PortfolioResponse updateUser(
 			@RequestParam(value = "pw", required = true) String password) {
 		
-		return appUserSerive.setUserPassword(password);
+		return appUserService.setUserPassword(password);
 	}
 }
