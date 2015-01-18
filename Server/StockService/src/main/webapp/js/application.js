@@ -11,7 +11,7 @@ angular.module("StockServiceClient").directive('unregistered', function() {
 	return {
 		restrict : 'E',
 		replace : true,
-		templateUrl : '/templates/unregistered.html'
+		templateUrl : 'templates/unregistered.html'
 	}
 });
 
@@ -19,7 +19,7 @@ angular.module("StockServiceClient").directive('registered', function() {
 	return {
 		restrict : 'E',
 		replace : true,
-		templateUrl : '/templates/registered.html'
+		templateUrl : 'templates/registered.html'
 	}
 });
 
@@ -32,7 +32,7 @@ angular.module("StockServiceClient").controller("MainController", ['Auth', '$sco
 			var canvasGraph = new CanvasGraph();
 
 			// Calling to get all Stocks
-			$http.get("/finance/stocks").success(
+			$http.get("finance/stocks").success(
 					function(data, status, headers, config) {
 						$scope.stocks = angular.fromJson(data);
 					});
@@ -41,7 +41,7 @@ angular.module("StockServiceClient").controller("MainController", ['Auth', '$sco
 
 				$scope.currentStock = stock;
 
-				$http.get("/finance/stocks/" + stock.symbol + "/history")
+				$http.get("finance/stocks/" + stock.symbol + "/history")
 						.success(function(data, status, headers, config) {
 							canvasGraph.draw(angular.fromJson(data));
 						});
@@ -50,7 +50,7 @@ angular.module("StockServiceClient").controller("MainController", ['Auth', '$sco
 
 			$scope.login = function(username, password) {
 				Auth.setCredentials(username, password);
-				$http.get("/secured/finance/transactions").success(
+				$http.get("secured/finance/transactions").success(
 						function(data, status, headers, config) {
 							$scope.loggedIn = true;
 							$scope.portfolio = angular.fromJson(data);
@@ -58,7 +58,7 @@ angular.module("StockServiceClient").controller("MainController", ['Auth', '$sco
 			}
 
 			$scope.register = function(username, password) {
-				$http.post("/users?un=" + username + "&pw=" + password).success(
+				$http.post("users?un=" + username + "&pw=" + password).success(
 						function(data, status, headers, config) {
 							$scope.login(username, password);
 						}).error(function() {
@@ -73,7 +73,7 @@ angular.module("StockServiceClient").controller("MainController", ['Auth', '$sco
 			
 			$scope.buyStock = function(stock, quantity) {
 							
-				$http.post("/secured/finance/transactions?stocksymbol=" + stock.symbol + "&amount=" + quantity + "&type=false").success(function(data) {
+				$http.post("secured/finance/transactions?stocksymbol=" + stock.symbol + "&amount=" + quantity + "&type=false").success(function(data) {
 					$scope.portfolio = angular.fromJson(data);
 				}).error(function(data, status, headers, config) {
 					alert(angular.fromJson(data).message);
@@ -81,7 +81,7 @@ angular.module("StockServiceClient").controller("MainController", ['Auth', '$sco
 			}
 			
 			$scope.sellStock = function(symbol, quantity) {
-				$http.post("/secured/finance/transactions?stocksymbol=" + symbol + "&amount=" + quantity + "&type=true").success(function(data){
+				$http.post("secured/finance/transactions?stocksymbol=" + symbol + "&amount=" + quantity + "&type=true").success(function(data){
 					$scope.portfolio = angular.fromJson(data);
 				}).error(function(data, status, headers, config) {
 					alert(angular.fromJson(data).message);
@@ -89,7 +89,7 @@ angular.module("StockServiceClient").controller("MainController", ['Auth', '$sco
 			}
 			
 			$scope.updatePassword = function(username, password) {
-				$http.put("/secured/users/" + username + "?pw=" + password).success(function(data){
+				$http.put("secured/users/" + username + "?pw=" + password).success(function(data){
 					alert("Passwort successfully changed!")
 					$scope.portfolio = angular.fromJson(data);
 				});
