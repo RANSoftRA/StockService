@@ -33,7 +33,7 @@ public class YQLServiceImpl implements YQLService {
 		YQLSingleQueryWrapper result = restTemplate.getForObject(uri,
 				YQLSingleQueryWrapper.class);
 
-		if (result != null && result.getQuery().getResults().getQuote() != null) {
+		if (result == null || result.getQuery().getResults().getQuote() == null) {
 			return null;
 		}
 
@@ -91,10 +91,7 @@ public class YQLServiceImpl implements YQLService {
 	@Override
 	public double getCurrentPrice(String symbol) {
 		Stock stock = getStock(symbol);
-		if(stock == null) {
-			return 0.0;
-		}
-		return stock.getLastTradedPriceOnly();
+		return stock != null ? stock.getLastTradedPriceOnly() : 0.0;
 	}
 
 	/**

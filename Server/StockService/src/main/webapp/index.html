@@ -18,23 +18,34 @@
 <title>Webclient StockService - Group 1</title>
 
 </head>
-<body ng-controller="BodyController">
-	<!-- Top Div ist für das Login notwendig - Möglicherweis -->
+<body ng-controller="MainController">
 	<div id="top">
 		<unregistered ng-show="!loggedIn"></unregistered>
 		<registered ng-show="loggedIn"></registered>
 	</div>
-	<div id="middle" class="container" ng-controller="MiddleController">
+	<div id="middle" class="container">
 		<div class="row">
 			<div class="col-md-5 stockOverview">
 				<ul>
 					<li ng-repeat="stock in stocks">
 						<div class="clickStockDiv" ng-click="getStockhistory(stock)">
 								{{stock.name}} 
-								<span ng-show="stock.change < 0" class="red pull-right">{{stock.change}} $</span> 
-								<span ng-show="stock.change >= 0" class="green pull-right">{{stock.change}} $</span>
-								<input ng-show="loggedIn" type="number" ng-model="stockQuantity" min="0"/>
-								<button ng-show="loggedIn" ng-click="buyStock(stock, stockQuantity)">Buy</button>
+								<span ng-show="stock.change < 0" class="red pull-right">{{stock.change}} EUR</span> 
+								<span ng-show="stock.change >= 0" class="green pull-right">{{stock.change}} EUR</span>
+								<div class="row" ng-show="loggedIn">
+									<div class="col-md-5">
+										<input type="number" ng-model="stockBuyQuantity" min="0" max="{{stock.volume}}"/>
+									</div>
+									<div class="col-md-5">
+										<span>{{stockBuyQuantity * stock.lastTradedPriceOnly}} EUR</span>
+									</div>
+									<div class="col-md-2">
+										<button ng-click="buyStock(stock, stockBuyQuantity)">Buy</button>
+									</div>
+								</div>
+								
+								
+								
 						</div>
 					</li>
 				</ul>
@@ -58,7 +69,7 @@
 										{{currentStock.name}}
 									</div>
 									<div class="col-md-3">
-										Price: {{currentStock.lastTradedPriceOnly}} $
+										Price: {{currentStock.lastTradedPriceOnly}} EUR
 									</div>
 									<div class="col-md-3">
 										Volume: {{currentStock.volume}}
@@ -72,33 +83,46 @@
 			</div>
 		</div>
 	</div>
-	<div class="container" ng-show="loggedIn">
+	<div class="container-fluid" ng-show="loggedIn" id="bottom">
 		<div class="row">
-			<div class="col-md-5">
-				<table>
+			
+			<div class="col-md-6">
+				<h3>Transactions</h3>
+				<table class="table">
 					<tr>
 						<th>Name</th>
-						<th>Typ</th>
-						<th>Menge</th>
-						<th>Preis</th>
-						<th>Datum</th>
+						<th>Type</th>
+						<th>Amount</th>
+						<th>Price</th>
+						<th>Date</th>
 					</tr>
+					<tr ng-repeat="transaction in portfolio.transaction" ng-class="transaction.transactionType == 'BUY' ? 'green' : 'red'">
+						<td>{{transaction.stock}}</td>
+						<td>{{transaction.transactionType}}</td>
+						<td>{{transaction.amount}}</td>
+						<td>{{transaction.price}} EUR</td>
+						<td>{{ transaction.date | date : 'dd.MM.yyyy @ hh:mm'}}</td>
+					</tr>
+				</table>
+			</div>
+			<div class="col-md-6">
+				<h3>Portfolio</h3>
+				<table class="table">
 					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<th>Name</th>
+						<th>Total Amount</th>
+						<th>Total Sum</th>
+						<th>To Sell</th>
+						<th>Sell</th>
+					</tr>
+					<tr ng-repeat="portfolioStock in portfolio.portfolioStock">
+						<td>{{portfolioStock.symbol}} - {{portfolioStock.name}}</td>
+						<td>{{portfolioStock.amount}}</td>
+						<td>{{portfolioStock.balance}} EUR</td>
+						<td><input type="number" ng-model="stockSellQuantity" min="0" max="{{portfolioStock.amount}}"/></td>
+						<td><button ng-click="sellStock(portfolioStock.symbol, stockSellQuantity)">Sell</button></td>
 					</tr>
 				</table>
-			</div>
-			<div class="col-md-5">
-				<table>
-					<tr></tr>
-				</table>
-			</div>
-			<div class="col-md-2">
-				
 			</div>
 		</div>
 	</div>

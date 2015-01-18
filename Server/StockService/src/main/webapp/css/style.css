@@ -7,20 +7,11 @@
 	color: white;
 }
 
-#top .btn {
-	width: 100%;
-	background: #177EE5;
-	border-color: #1072D3;
-	color: white;
-	font-weight: bold;
-	text-shadow: 1px 1px #666;
+#top input {
+	color: black;
 }
 
-#top .btn:hover, #top .btn:focus {
-	background: #1072D3;
-}
-
-#middle {
+#middle, #bottom {
 	margin-top: 20px;
 }
 

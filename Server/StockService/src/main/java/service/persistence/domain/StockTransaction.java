@@ -38,6 +38,9 @@ public class StockTransaction {
 	@JoinColumn(name="idAppUser", nullable=false)
 	private AppUser appUser;	
 	
+	public StockTransaction() {
+		
+	}
 	
 	public StockTransaction(String stock, int amount, Date date, double price,
 			TransactionType transactionType, AppUser user) {

@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import service.data.PortfolioStock;
 import service.data.Stock;
-import service.data.TransactionResponse;
+import service.data.PortfolioResponse;
 import service.persistence.AppUserDao;
 import service.persistence.TransactionDao;
 import service.persistence.domain.AppUser;
@@ -64,10 +64,11 @@ public class AppUserServiceImpl implements AppUserService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public TransactionResponse getAuthenticatedUserTransactions() {
+	public PortfolioResponse getAuthenticatedUserTransactions() {
 
-		List<StockTransaction> transactions = transactionDao
-				.getTransactions(getAuthenticatedUser());
+		AppUser appUser = getAuthenticatedUser();
+		
+		List<StockTransaction> transactions = transactionDao.getTransactions(appUser);
 
 		List<String> stocksInPortfolio = new ArrayList<String>();
 
@@ -87,12 +88,25 @@ public class AppUserServiceImpl implements AppUserService {
 				if (stockInPortfolio.equals(transaction.getStock())) {
 					int before = stockSum.get(stockInPortfolio);
 					stockSum.remove(stockInPortfolio);
-					stockSum.put(stockInPortfolio, transaction.getAmount()
-							+ before);
+					
+					switch(transaction.getTransactionType()) {
+					case BUY:
+						stockSum.put(stockInPortfolio, transaction.getAmount()
+								+ before);
+						break;
+					case SELL:
+						stockSum.put(stockInPortfolio, before - transaction.getAmount());
+						break;
+					}
 				}
 			}
 		}
 
+		// Remove all where amount is 0
+		for(String stockInPortfolio : stocksInPortfolio) {
+			stockSum.remove(stockInPortfolio, 0);
+		}
+		
 		List<PortfolioStock> portfolioStocks = new ArrayList<PortfolioStock>();
 
 		for (Map.Entry<String, Integer> entry : stockSum.entrySet()) {
@@ -108,16 +122,27 @@ public class AppUserServiceImpl implements AppUserService {
 
 		}
 
-		return new TransactionResponse(transactions, portfolioStocks);
+		return new PortfolioResponse(transactions, portfolioStocks, appUser);
 	}
 
 	@Override
 	@Transactional(readOnly = false)
-	public TransactionResponse setUserPassword(String password) {
+	public PortfolioResponse setUserPassword(String password) {
 		
 		AppUser appUser = getAuthenticatedUser();
 		appUser.setPassword(encoder.encode(password));
 		
 		return getAuthenticatedUserTransactions();
+	}
+
+	@Override
+	@Transactional(readOnly = false)
+	public void registerUser(String username, String password) {
+		
+		AppUser newAppUser = new AppUser();
+		newAppUser.setBalance(1000.0);
+		newAppUser.setPassword(encoder.encode(password));
+		newAppUser.setUsername(username);
+		appUserDao.saveOrUpdateUser(newAppUser);
 	}
 }

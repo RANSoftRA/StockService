@@ -18,14 +18,15 @@ Meeting am 04.11.2014:
   (3) PUT - Update User
   (4) GET - User Transactions
   (5) POST - Add Transaction - Buy or Sell
+  (6) POST - Registrieren vom User
   
 Calls:
 (1) GET - /finance/stocks
-(2) GET - finance/stocks/{stocksymbol}/history
+(2) GET - /finance/stocks/{stocksymbol}/history
 (3) PUT - /secured/users/{username}&pw=pw
 (4) GET - /secured/finance/transactions
 (5) POST - /secured/finance/transactions?stocksymbol=iwie&amount=20&isSell=true/false
-
+(6) POST - /users?un=...&pw=...
 
 ** Alle Calls unter /secured müssen einen HTTP-Basic Authentication header mitschicken.
 

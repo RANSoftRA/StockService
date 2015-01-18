@@ -1,7 +1,7 @@
 <div class="container-fluid">
 	<div class="form-horizontal">
 		<div class="form-group" style="width: 100%;">
-			<label class="col-sm-1 control-label">E-Mail</label>
+			<label class="col-sm-1 control-label">Username</label>
 			<div class="col-sm-2">
 				<input type="text" class="form-control" ng-model="un"></input>
 			</div>
@@ -9,11 +9,12 @@
 			<div class="col-sm-2">
 				<input type="password" class="form-control" ng-model="pw"></input>
 			</div>
-			<div class="col-sm-1">
-				<button type="submit" name="login" class="btn btn-default" ng-click="login(un,pw)">Login</button>
-			</div>
-			<div class="col-sm-1">
-				<button type="submit" name="register" class="btn btn-default" ng-click="register(un,pw)">Register</button>
+			<div class="col-sm-2">
+				<div class="btn-group">
+					<button type="submit" name="login" class="btn btn-primary" ng-click="login(un,pw)">Login</button>
+					<button type="submit" name="register" class="btn btn-primary" ng-click="register(un,pw)">Register</button>
+				</div>
+				
 			</div>
 		</div>
 	</div>

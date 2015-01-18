@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import service.data.TransactionResponse;
+import service.data.PortfolioResponse;
+import service.misc.TransactionError;
 import service.servicelayer.AppUserService;
 import service.servicelayer.TransactionService;
 import service.servicelayer.YQLService;
@@ -19,7 +20,7 @@ import service.servicelayer.YQLService;
 public class SecuredController {
 
 	@Autowired
-	private TransactionService securedService;
+	private TransactionService transactionService;
 
 	@Autowired
 	private AppUserService appUserSerive;
@@ -29,22 +30,22 @@ public class SecuredController {
 
 	@RequestMapping(value = "/finance/transactions", method = RequestMethod.POST)
 	@Transactional
-	public TransactionResponse addTransaction(
+	public PortfolioResponse addTransaction(
 			@RequestParam(value = "stocksymbol", required = true) String symbol,
 			@RequestParam(value = "amount", required = true) int amount,
-			@RequestParam(value = "type", required = true) boolean isSell) {
+			@RequestParam(value = "type", required = true) boolean isSell) throws TransactionError {
 
-		return securedService.addTransaction(symbol, amount, isSell);
+		return transactionService.addTransaction(symbol, amount, isSell);
 	}
 
 	@Transactional
 	@RequestMapping(value = "/finance/transactions", method = RequestMethod.GET)
-	public TransactionResponse getUserTransactions() {
+	public PortfolioResponse getUserTransactions() {
 		return appUserSerive.getAuthenticatedUserTransactions();
 	}
 
 	@RequestMapping(value = "/users/{username}", method = RequestMethod.PUT)
-	public TransactionResponse updateUser(
+	public PortfolioResponse updateUser(
 			@RequestParam(value = "pw", required = true) String password) {
 		
 		return appUserSerive.setUserPassword(password);

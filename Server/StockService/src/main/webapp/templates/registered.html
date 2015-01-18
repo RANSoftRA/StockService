@@ -1,8 +1,15 @@
 <div class="container-fluid">
 	<div class="form-horizontal">
 		<div class="form-group" style="width: 100%;">
+			
+			<div class="col-sm-11">
+				Hallo - {{portfolio.appUser.username}}<br/>
+				Current Balance is: <b>{{portfolio.appUser.balance}} EUR</b><br/>
+				<input type="password" ng-model="newPassword"></input>
+				<button ng-click="updatePassword(portfolio.appUser.username, newPassword)" class="btn btn-success" style="width: auto;">Update Password</button>
+			</div>
 			<div class="col-sm-1">
-				<button type="submit" name="logout" class="btn btn-default" ng-click="logout()">Logout</button>
+				<button type="submit" name="logout" class="btn btn-primary" ng-click="logout()">Logout</button>
 			</div>
 		</div>
 	</div>

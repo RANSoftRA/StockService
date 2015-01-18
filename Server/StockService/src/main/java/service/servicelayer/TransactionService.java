@@ -1,9 +1,8 @@
 package service.servicelayer;
 
-import service.data.TransactionResponse;
+import service.data.PortfolioResponse;
+import service.misc.TransactionError;
 
 public interface TransactionService {
-	TransactionResponse addTransaction(String symbol, int amount, boolean isSell);
-	
-	TransactionResponse getTransactions();
+	PortfolioResponse addTransaction(String symbol, int amount, boolean isSell) throws TransactionError;
 }

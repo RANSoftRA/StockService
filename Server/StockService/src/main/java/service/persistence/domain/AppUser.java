@@ -9,8 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table
+@JsonIgnoreProperties({"password", "transactions"})
 public class AppUser {
 
 	@GeneratedValue
@@ -28,6 +31,11 @@ public class AppUser {
 	
 	@OneToMany(mappedBy="appUser")
 	private Set<StockTransaction> transactions;
+	
+	
+	public AppUser() {
+		
+	}
 	
 	public String getUsername() {
 		return username;

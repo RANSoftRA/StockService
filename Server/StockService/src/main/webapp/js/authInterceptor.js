@@ -13,13 +13,13 @@ angular.module('StockServiceClient').factory('AuthInterceptor', ['$cookieStore',
         },
         response: function(response) {
             if (response.status === 401) {
-            	alert("not Logged In!")
+            	alert("Login failed - Check credentials!")
             }
             return response || $q.when(response);
         },
         responseError: function(rejection) {
         	if(rejection.status === 401) {
-        		alert("not Logged In!");
+        		alert("Login failed - Check credentials!");
         	}
         	return $q.reject(rejection);
         }
