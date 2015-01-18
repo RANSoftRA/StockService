@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import service.data.Stock;
@@ -17,7 +17,7 @@ import service.data.jsonwrapper.YQLSingleQueryWrapper;
 import service.misc.DateFormat;
 import service.servicelayer.YQLService;
 
-@Component
+@Service
 public class YQLServiceImpl implements YQLService {
 
 	protected final String serviceUrl = "http://query.yahooapis.com/v1/public/yql";
